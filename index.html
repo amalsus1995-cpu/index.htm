@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منصة أرباحي - المهام والمكافآت الرقمية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --card-bg: #1e293b;
+      --primary: #10b981;
+      --primary-hover: #059669;
+      --secondary: #3b82f6;
+      --accent: #f59e0b;
+      --danger: #ef4444;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background-color: #0f172a;
+      padding: 0.5rem 1.25rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border-color);
+    }
+
+    .user-badge .balance {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat-info h4 {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-info p {
+      font-size: 1.75rem;
+      font-weight: 800;
+    }
+
+    .stat-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .icon-green { background: rgba(16, 185, 129, 0.15); color: var(--primary); }
+    .icon-blue { background: rgba(59, 130, 246, 0.15); color: var(--secondary); }
+    .icon-orange { background: rgba(245, 158, 11, 0.15); color: var(--accent); }
+    .icon-red { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+
+    /* Actions Bar */
+    .action-bar {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover { background-color: var(--primary-hover); }
+
+    .btn-secondary {
+      background-color: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+    .btn-secondary:hover { background-color: var(--border-color); }
+
+    /* Content Layout */
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .layout-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Tasks List */
+    .task-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color);
+      margin-bottom: 0.75rem;
+      background: rgba(15, 23, 42, 0.4);
+      transition: transform 0.2s ease;
+    }
+
+    .task-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .task-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .task-title {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .task-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .task-reward {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    /* Referral Box */
+    .ref-box {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .ref-input {
+      flex-grow: 1;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      color: var(--text-muted);
+      padding: 0.75rem;
+      font-size: 0.85rem;
+      text-align: left;
+      direction: ltr;
+    }
+
+    /* Table */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+    }
+
+    th, td {
+      padding: 0.85rem;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.9rem;
+    }
+
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .status-done { background: rgba(16, 185, 129, 0.15); color: var(--primary); }
+    .status-pending { background: rgba(245, 158, 11, 0.15); color: var(--accent); }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 1rem;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-content {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 2rem;
+      width: 100%;
+      max-width: 450px;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .close-btn {
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 1.25rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .form-control {
+      width: 100%;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      color: white;
+      font-size: 1rem;
+    }
+
+    /* Notification */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      background: var(--card-bg);
+      border: 1px solid var(--primary);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+      display: none;
+      z-index: 300;
+      align-items: center;
+      gap: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- شريط التنقل العلوي -->
+  <header class="navbar">
+    <a href="#" class="brand">
+      <i class="fa-solid fa-coins"></i>
+      منصة أرباحي
+    </a>
+    <div class="user-badge">
+      <i class="fa-solid fa-wallet" style="color: var(--text-muted);"></i>
+      <span>الرصيد:</span>
+      <span class="balance" id="headerBalance">$0.00</span>
+    </div>
+  </header>
+
+  <!-- المحتوى الرئيسي -->
+  <main class="container">
+
+    <!-- الإحصائيات -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-info">
+          <h4>الرصيد القابل للسحب</h4>
+          <p id="totalBalance">$0.00</p>
+        </div>
+        <div class="stat-icon icon-green">
+          <i class="fa-solid fa-dollar-sign"></i>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-info">
+          <h4>المهام المكتملة</h4>
+          <p id="completedTasksCount">0</p>
+        </div>
+        <div class="stat-icon icon-blue">
+          <i class="fa-solid fa-check-circle"></i>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-info">
+          <h4>أرباح الإحالات</h4>
+          <p id="refEarnings">$0.00</p>
+        </div>
+        <div class="stat-icon icon-orange">
+          <i class="fa-solid fa-users"></i>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-info">
+          <h4>إجمالي السحوبات</h4>
+          <p id="withdrawnTotal">$0.00</p>
+        </div>
+        <div class="stat-icon icon-red">
+          <i class="fa-solid fa-arrow-down"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- أزرار الإجراءات السريعة -->
+    <div class="action-bar">
+      <button class="btn btn-primary" onclick="claimDailyReward()">
+        <i class="fa-solid fa-gift"></i>
+        المكافأة اليومية (0.50$)
+      </button>
+      <button class="btn btn-secondary" onclick="openModal('withdrawModal')">
+        <i class="fa-solid fa-money-bill-transfer"></i>
+        طلب سحب أرباح
+      </button>
+    </div>
+
+    <!-- الشبكة الرئيسية للواجهة -->
+    <div class="layout-grid">
+      
+      <!-- قائمة المهام المتاحة -->
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fa-solid fa-list-check" style="color: var(--secondary);"></i>
+              المهام المتاحة اليوم
+            </h3>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">تتجدد كل 24 ساعة</span>
+          </div>
+
+          <div id="tasksList">
+            <!-- سيتم توليد المهام بالجافاسكربت -->
+          </div>
+        </div>
+
+        <!-- جدول العمليات الأخيرة -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fa-solid fa-clock-rotate-left" style="color: var(--accent);"></i>
+              سجل العمليات
+            </h3>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>النوع</th>
+                  <th>المبلغ</th>
+                  <th>الحالة</th>
+                  <th>التاريخ</th>
+                </tr>
+              </thead>
+              <tbody id="historyTable">
+                <!-- سيتم ملء السجل تلقائياً -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- الجانب الأيسر: الإحالة ومعلومات السحب -->
+      <div>
+        <!-- بطاقة الإحالة -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fa-solid fa-share-nodes" style="color: var(--primary);"></i>
+              برنامج الإحالة
+            </h3>
+          </div>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
+            شارك رابط الإحالة الخاص بك واحصل على <strong>10%</strong> من أرباح كل مستخدم جديد يسجل من خلالك مدى الحياة!
+          </p>
+          <div class="ref-box">
+            <input type="text" class="ref-input" id="refLink" value="https://example.com/?ref=usr_8921" readonly>
+            <button class="btn btn-primary" onclick="copyRefLink()">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- شروط وطرق السحب -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fa-solid fa-circle-info" style="color: var(--secondary);"></i>
+              طرق السحب المدعومة
+            </h3>
+          </div>
+          <ul style="list-style: none; font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.75rem;">
+            <li><i class="fa-solid fa-check" style="color: var(--primary); margin-left: 0.5rem;"></i> USDT (شبكة TRC-20) - حد أدنى: 10$</li>
+            <li><i class="fa-solid fa-check" style="color: var(--primary); margin-left: 0.5rem;"></i> بنك بايير Payeer - حد أدنى: 5$</li>
+            <li><i class="fa-solid fa-check" style="color: var(--primary); margin-left: 0.5rem;"></i> تحويل مصرفي مباشر - حد أدنى: 50$</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- نافذة السحب المنبثقة (Modal) -->
+  <div class="modal" id="withdrawModal">
+    <div class="modal-content">
+      <div class="modal-title">
+        <span>طلب سحب رصيد</span>
+        <i class="fa-solid fa-xmark close-btn" onclick="closeModal('withdrawModal')"></i>
+      </div>
+      <form id="withdrawForm" onsubmit="handleWithdraw(event)">
+        <div class="form-group">
+          <label>وسيلة الدفع</label>
+          <select class="form-control" id="withdrawMethod" required>
+            <option value="USDT">USDT (TRC-20)</option>
+            <option value="Payeer">Payeer</option>
+            <option value="Bank">تحويل بنكي</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>عنوان المحفظة / رقم الحساب</label>
+          <input type="text" class="form-control" id="walletAddress" placeholder="مثال: TLa8..." required>
+        </div>
+        <div class="form-group">
+          <label>المبلغ المراد سحبه ($)</label>
+          <input type="number" class="form-control" id="withdrawAmount" min="5" step="0.1" placeholder="أدنى مبلغ 5$" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 0.85rem;">
+          تأكيد طلب السحب
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- تنبيه Toast -->
+  <div class="toast" id="toastMessage">
+    <i class="fa-solid fa-circle-check" style="color: var(--primary);"></i>
+    <span id="toastText">تم تنفيذ العملية بنجاح!</span>
+  </div>
+
+  <!-- الجافاسكربت الخاص بالتفاعل -->
+  <script>
+    // الحالة الأولية (State)
+    let state = {
+      balance: 2.50,
+      completedTasks: 0,
+      referralEarnings: 0.00,
+      totalWithdrawn: 0.00,
+      history: [
+        { type: 'مكافأة تسجيل', amount: '+$2.50', status: 'مكتمل', date: 'اليوم' }
+      ]
+    };
+
+    // قائمة المهام
+    const tasks = [
+      { id: 1, title: 'مشاهدة فيديو ترويجي (30 ثانية)', desc: 'شاهد الإعلان بالكامل للحصول على المكافأة', reward: 0.25 },
+      { id: 2, title: 'تقييم تطبيق على المتجر', desc: 'قم بتقييم التطبيق بـ 5 نجوم وكتابة رأيك', reward: 0.80 },
+      { id: 3, title: 'إكمال استبيان رقمي سريع', desc: 'استطلاع رأي خفيف مكون من 4 أسئلة فقط', reward: 1.20 },
+      { id: 4, title: 'متابعة حساب المنصة الرسمي', desc: 'تابع الصفحة على منصة التواصل الاجتماعي', reward: 0.35 }
+    ];
+
+    // تحديث الأرقام والواجهة
+    function updateUI() {
+      document.getElementById('headerBalance').innerText = `$${state.balance.toFixed(2)}`;
+      document.getElementById('totalBalance').innerText = `$${state.balance.toFixed(2)}`;
+      document.getElementById('completedTasksCount').innerText = state.completedTasks;
+      document.getElementById('refEarnings').innerText = `$${state.referralEarnings.toFixed(2)}`;
+      document.getElementById('withdrawnTotal').innerText = `$${state.totalWithdrawn.toFixed(2)}`;
+
+      // تحديث الجدول
+      const tableBody = document.getElementById('historyTable');
+      tableBody.innerHTML = '';
+      state.history.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.type}</td>
+          <td style="font-weight: 700; color: ${item.amount.startsWith('+') ? 'var(--primary)' : 'var(--danger)'}">${item.amount}</td>
+          <td><span class="status-badge ${item.status === 'مكتمل' ? 'status-done' : 'status-pending'}">${item.status}</span></td>
+          <td>${item.date}</td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    // عرض المهام
+    function renderTasks() {
+      const container = document.getElementById('tasksList');
+      container.innerHTML = '';
+      tasks.forEach(task => {
+        const div = document.createElement('div');
+        div.className = 'task-item';
+        div.id = `task-${task.id}`;
+        div.innerHTML = `
+          <div class="task-meta">
+            <span class="task-title">${task.title}</span>
+            <span class="task-desc">${task.desc}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <span class="task-reward">+$${task.reward.toFixed(2)}</span>
+            <button class="btn btn-secondary" onclick="completeTask(${task.id}, ${task.reward})">
+              بدء المهمة
+            </button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // إتمام المهمة
+    function completeTask(id, reward) {
+      const el = document.getElementById(`task-${id}`);
+      if (el) {
+        el.style.opacity = '0.5';
+        el.querySelector('button').disabled = true;
+        el.querySelector('button').innerText = 'تم الإنجاز';
+      }
+
+      state.balance += reward;
+      state.completedTasks += 1;
+      state.history.unshift({
+        type: 'إنجاز مهمة',
+        amount: `+$${reward.toFixed(2)}`,
+        status: 'مكتمل',
+        date: 'الآن'
+      });
+
+      showToast(`أحسنت! تم إضافة $${reward.toFixed(2)} إلى رصيدك`);
+      updateUI();
+    }
+
+    // المطالبة بالمكافأة اليومية
+    let claimedToday = false;
+    function claimDailyReward() {
+      if (claimedToday) {
+        showToast('لقد حصلت على المكافأة اليومية بالفعل! عد غداً.');
+        return;
+      }
+      claimedToday = true;
+      state.balance += 0.50;
+      state.history.unshift({
+        type: 'مكافأة يومية',
+        amount: '+$0.50',
+        status: 'مكتمل',
+        date: 'الآن'
+      });
+      showToast('مبروك! حصلت على مكافأة يومية قدرها 0.50$');
+      updateUI();
+    }
+
+    // السحب
+    function handleWithdraw(e) {
+      e.preventDefault();
+      const amount = parseFloat(document.getElementById('withdrawAmount').value);
+      const method = document.getElementById('withdrawMethod').value;
+
+      if (amount > state.balance) {
+        showToast('رصيدك غير كافٍ لإتمام طلب السحب!');
+        return;
+      }
+
+      state.balance -= amount;
+      state.totalWithdrawn += amount;
+      state.history.unshift({
+        type: `سحب (${method})`,
+        amount: `-$${amount.toFixed(2)}`,
+        status: 'قيد المراجعة',
+        date: 'الآن'
+      });
+
+      closeModal('withdrawModal');
+      document.getElementById('withdrawForm').reset();
+      showToast('تم تسجيل طلب السحب وهو قيد المراجعة بنجاح!');
+      updateUI();
+    }
+
+    // نسخ رابط الإحالة
+    function copyRefLink() {
+      const input = document.getElementById('refLink');
+      input.select();
+      navigator.clipboard.writeText(input.value);
+      showToast('تم نسخ رابط الإحالة بنجاح!');
+    }
+
+    // التحكم بالنافذة المنبثقة
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // إظهار Toast
+    function showToast(text) {
+      const toast = document.getElementById('toastMessage');
+      document.getElementById('toastText').innerText = text;
+      toast.style.display = 'flex';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3500);
+    }
+
+    // التشغيل المبدئي
+    renderTasks();
+    updateUI();
+  </script>
+</body>
+</html>
