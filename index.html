@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>منصة التداول الرقمي الاحترافية</title>
+  <title>منصة التداول الحي المباشر</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root {
-      --bg-dark: #0b0e14;
-      --panel-bg: #151924;
-      --card-inner: #1e2332;
-      --primary: #10b981;       /* أخضر للشراء والربح */
-      --danger: #ef4444;        /* أحمر للبيع والخسارة */
+      --bg-dark: #0a0e17;
+      --panel-bg: #131824;
+      --card-bg: #1a2233;
+      --primary: #10b981;
+      --danger: #ef4444;
       --accent: #f59e0b;
-      --border-color: #272e42;
-      --text-main: #f3f4f6;
-      --text-muted: #848e9c;
+      --text-main: #f8fafc;
+      --text-muted: #8b9bb4;
+      --border-color: #26324a;
     }
 
     * {
@@ -34,127 +34,101 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
     }
 
     /* الشريط العلوي */
     .navbar {
-      background-color: var(--panel-bg);
+      background: var(--panel-bg);
       border-bottom: 1px solid var(--border-color);
       padding: 0.75rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 50;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 1.2rem;
+      gap: 0.6rem;
       font-weight: 800;
+      font-size: 1.25rem;
       color: #38bdf8;
-      text-decoration: none;
     }
 
-    .market-selector {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .pair-badge {
-      background: var(--card-inner);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 0.35rem 0.75rem;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
+    .live-indicator {
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--primary);
+      background: rgba(16, 185, 129, 0.1);
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
     }
 
-    .pair-badge.active {
-      border-color: #38bdf8;
-      color: #38bdf8;
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
     }
 
-    .header-balance {
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    .balance-box {
       display: flex;
       align-items: center;
-      gap: 1rem;
-    }
-
-    .balance-chip {
-      background: var(--card-inner);
-      border: 1px solid var(--border-color);
+      gap: 0.75rem;
+      background: var(--card-bg);
       padding: 0.4rem 1rem;
       border-radius: 9999px;
-      font-size: 0.9rem;
+      border: 1px solid var(--border-color);
       font-weight: 700;
-      color: var(--primary);
     }
 
-    /* هيكل منصة التداول */
-    .trading-layout {
+    .balance-box span.val {
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    /* مساحة التداول الرئيسية */
+    .main-grid {
       display: grid;
       grid-template-columns: 1fr 340px;
-      grid-template-rows: calc(100vh - 120px);
-      gap: 10px;
-      padding: 10px;
+      gap: 12px;
+      padding: 12px;
       flex-grow: 1;
     }
 
-    @media (max-width: 992px) {
-      .trading-layout {
+    @media (max-width: 900px) {
+      .main-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: auto;
       }
     }
 
-    /* قسم الرسم البياني والصفقات السفلية */
-    .chart-section {
+    /* منطقة الرسم البياني والشارت */
+    .center-panel {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      height: 100%;
+      gap: 12px;
     }
 
-    .chart-wrapper {
-      flex: 3;
+    .chart-container {
       background: var(--panel-bg);
       border: 1px solid var(--border-color);
       border-radius: 8px;
+      height: 440px;
       overflow: hidden;
-      min-height: 420px;
     }
 
-    .bottom-panel {
-      flex: 2;
-      background: var(--panel-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1rem;
-      overflow-y: auto;
-    }
-
-    .panel-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: var(--text-muted);
-    }
-
-    /* نموذج تنفيذ الأوامر (لوحة التداول الجانبية) */
-    .order-book-panel {
+    /* لوحة الأوامر الجانبية */
+    .order-panel {
       background: var(--panel-bg);
       border: 1px solid var(--border-color);
       border-radius: 8px;
@@ -164,34 +138,25 @@
       gap: 1rem;
     }
 
-    .trade-type-tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem;
-      background: var(--card-inner);
-      padding: 4px;
+    .price-tracker {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 0.75rem;
       border-radius: 8px;
+      text-align: center;
     }
 
-    .tab-btn {
-      padding: 0.6rem;
-      border: none;
-      border-radius: 6px;
-      font-weight: 700;
-      cursor: pointer;
-      background: transparent;
+    .price-tracker .symbol {
+      font-size: 0.85rem;
       color: var(--text-muted);
-      transition: all 0.2s;
     }
 
-    .tab-btn.buy-tab.active {
-      background: var(--primary);
-      color: white;
-    }
-
-    .tab-btn.sell-tab.active {
-      background: var(--danger);
-      color: white;
+    .price-tracker .current-price {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--primary);
+      transition: color 0.3s;
+      direction: ltr;
     }
 
     .form-group {
@@ -201,469 +166,465 @@
     }
 
     .form-group label {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
     }
 
-    .input-box {
-      display: flex;
-      align-items: center;
-      background: var(--card-inner);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 0 0.75rem;
-    }
-
-    .input-box input, .input-box select {
+    .input-field {
       width: 100%;
-      background: transparent;
-      border: none;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
       color: white;
-      padding: 0.65rem 0;
-      font-size: 0.95rem;
+      padding: 0.65rem 0.8rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 700;
       outline: none;
       direction: ltr;
       text-align: right;
     }
 
-    .input-addon {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      padding-left: 0.5rem;
+    .input-field:focus {
+      border-color: #38bdf8;
     }
 
-    .order-action-btn {
+    .btn-buy {
       width: 100%;
-      padding: 0.85rem;
+      padding: 0.9rem;
+      background: var(--primary);
+      color: white;
       border: none;
       border-radius: 8px;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 800;
       cursor: pointer;
-      color: white;
-      margin-top: 0.5rem;
-      transition: opacity 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: transform 0.1s, background-color 0.2s;
     }
 
-    .btn-buy { background: var(--primary); }
-    .btn-sell { background: var(--danger); }
-    .order-action-btn:hover { opacity: 0.9; }
+    .btn-buy:hover {
+      background: #059669;
+    }
 
-    /* جداول الصفقات */
+    .btn-buy:active {
+      transform: scale(0.98);
+    }
+
+    /* جدول الصفقات المفتوحة */
+    .positions-panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .positions-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
       text-align: right;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
     }
 
     th, td {
-      padding: 0.6rem;
+      padding: 0.75rem 0.5rem;
       border-bottom: 1px solid var(--border-color);
     }
 
-    th { color: var(--text-muted); font-weight: 600; }
-
-    .badge-buy { color: var(--primary); font-weight: 700; }
-    .badge-sell { color: var(--danger); font-weight: 700; }
-
-    .btn-close-pos {
-      background: rgba(239, 68, 68, 0.15);
-      color: var(--danger);
-      border: 1px solid var(--danger);
-      padding: 0.25rem 0.6rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.75rem;
-      font-weight: 700;
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
     }
 
-    .btn-close-pos:hover {
+    .pnl-winning {
+      color: var(--primary);
+      font-weight: 800;
+      animation: flashGreen 0.6s ease;
+    }
+
+    .pnl-losing {
+      color: var(--danger);
+      font-weight: 800;
+      animation: flashRed 0.6s ease;
+    }
+
+    @keyframes flashGreen {
+      0% { background: rgba(16, 185, 129, 0.25); }
+      100% { background: transparent; }
+    }
+
+    @keyframes flashRed {
+      0% { background: rgba(239, 68, 68, 0.25); }
+      100% { background: transparent; }
+    }
+
+    .btn-close {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .btn-close:hover {
       background: var(--danger);
       color: white;
     }
 
-    /* أزرار الإيداع والسحب */
-    .top-actions {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .btn-action {
-      background: var(--card-inner);
-      border: 1px solid var(--border-color);
-      color: white;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    /* Modal */
-    .modal {
-      display: none;
+    /* تنبيهات الإشعار */
+    .alert-toast {
       position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(4px);
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.85rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      display: none;
       align-items: center;
-      justify-content: center;
-      z-index: 100;
-      padding: 1rem;
+      gap: 0.6rem;
+      z-index: 1000;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
-    .modal.active { display: flex; }
-    .modal-card {
-      background: var(--panel-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 1.5rem;
-      width: 100%;
-      max-width: 420px;
+
+    .alert-success {
+      background: #064e3b;
+      color: #34d399;
+      border: 1px solid #059669;
+    }
+
+    .alert-danger {
+      background: #7f1d1d;
+      color: #fca5a5;
+      border: 1px solid #dc2626;
     }
   </style>
 </head>
 <body>
 
-  <!-- شريط التنقل العلوي -->
+  <!-- تنبيه منبثق لتأكيد الشراء أو رفض الرصيد -->
+  <div id="toastAlert" class="alert-toast">
+    <i id="toastIcon" class="fa-solid fa-circle-check"></i>
+    <span id="toastMsg">تمت العملية</span>
+  </div>
+
+  <!-- الشريط العلوي -->
   <header class="navbar">
-    <div style="display: flex; align-items: center; gap: 1.5rem;">
-      <a href="#" class="brand">
-        <i class="fa-solid fa-chart-line"></i>
-        برو تريدنج ProTrader
-      </a>
-      <div class="market-selector">
-        <div class="pair-badge active" onclick="switchPair('BINANCE:BTCUSDT')">
-          <i class="fa-brands fa-bitcoin" style="color: #f7931a;"></i>
-          BTC/USDT
-        </div>
-        <div class="pair-badge" onclick="switchPair('BINANCE:ETHUSDT')">
-          <i class="fa-brands fa-ethereum" style="color: #627eea;"></i>
-          ETH/USDT
-        </div>
-      </div>
+    <div class="brand">
+      <i class="fa-solid fa-chart-line"></i>
+      منصة التداول الحي
     </div>
 
-    <div class="header-balance">
-      <div class="balance-chip">
-        رصيد المحفظة: <span id="userBalance">$10,000.00</span>
-      </div>
-      <div class="top-actions">
-        <button class="btn-action" onclick="openModal('depositModal')"><i class="fa-solid fa-plus"></i> إيداع</button>
-        <button class="btn-action" onclick="openModal('withdrawModal')"><i class="fa-solid fa-arrow-up-from-bracket"></i> سحب</button>
-      </div>
+    <div class="live-indicator">
+      <div class="pulse-dot"></div>
+      سوق BTC/USDT مباشر
+    </div>
+
+    <div class="balance-box">
+      <span>رصيدك المتاح:</span>
+      <span class="val" id="balanceDisplay">$500.00</span>
+      <button onclick="addFunds()" style="background: none; border: none; color: #38bdf8; cursor: pointer; margin-right: 0.5rem;" title="إعادة تعبئة تجريبية">
+        <i class="fa-solid fa-circle-plus"></i> شحن
+      </button>
     </div>
   </header>
 
-  <!-- مساحة التداول الرئيسية -->
-  <main class="trading-layout">
-    
-    <!-- قسم الشارت وسجل الصفقات -->
-    <section class="chart-section">
-      <!-- منصة الرسم البياني الحية من TradingView -->
-      <div class="chart-wrapper" id="tradingview_widget"></div>
+  <!-- جسم المنصة -->
+  <main class="main-grid">
 
-      <!-- الصفقات المفتوحة والمغلقة -->
-      <div class="bottom-panel">
-        <div class="panel-title">
-          <span><i class="fa-solid fa-folder-open"></i> الصفقات المفتوحة (Positions)</span>
-          <span style="font-size: 0.8rem;" id="activePositionsCount">0 صفقات نشطة</span>
+    <!-- الشارت والصفقات -->
+    <div class="center-panel">
+      <!-- شارت TradingView الحي الحقيقي -->
+      <div class="chart-container" id="tv_chart_container"></div>
+
+      <!-- جدول الصفقات المفتوحة وحالة الربح/الخسارة الحية -->
+      <div class="positions-panel">
+        <div class="positions-header">
+          <h3 style="font-size: 1.05rem;"><i class="fa-solid fa-list-check" style="color: #38bdf8;"></i> الصفقات المفتوحة حالياً</h3>
+          <span id="activeTradesCount" style="font-size: 0.85rem; color: var(--text-muted);">0 صفقات</span>
         </div>
+
         <table>
           <thead>
             <tr>
               <th>الرمز</th>
               <th>النوع</th>
-              <th>سعر الدخول</th>
-              <th>الحجم (USDT)</th>
-              <th>الرافعة</th>
-              <th>الربح/الخسارة (PnL)</th>
+              <th>سعر الشراء</th>
+              <th>السعر الحالي</th>
+              <th>مبلغ الاستثمار</th>
+              <th>الربح / الخسارة (PnL)</th>
               <th>إجراء</th>
             </tr>
           </thead>
-          <tbody id="positionsTable">
-            <tr>
-              <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 1.5rem;">لا توجد صفقات مفتوحة حالياً</td>
+          <tbody id="positionsTableBody">
+            <tr id="emptyRow">
+              <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 2rem;">
+                لا توجد صفقات جارية. اضغط على زر الشراء لفتح صفقة جديدة.
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
-    </section>
+    </div>
 
-    <!-- لوحة تنفيذ الأوامر الجانبية (Buy / Sell) -->
-    <aside class="order-book-panel">
-      <div class="trade-type-tabs">
-        <button class="tab-btn buy-tab active" id="buyTab" onclick="setOrderType('BUY')">شراء / صعود (Long)</button>
-        <button class="tab-btn sell-tab" id="sellTab" onclick="setOrderType('SELL')">بيع / هبوط (Short)</button>
+    <!-- لوحة أمر الشراء -->
+    <aside class="order-panel">
+      <div class="price-tracker">
+        <div class="symbol">سعر البيتكوين الحي (Binance Live Feed)</div>
+        <div class="current-price" id="liveBtcPrice">جاري الاتصال...</div>
       </div>
 
       <div class="form-group">
-        <label>الرافعة المالية (Leverage)</label>
-        <div class="input-box">
-          <select id="leverageSelect">
-            <option value="1">1x (بدون رافعة - فوري)</option>
-            <option value="5">5x</option>
-            <option value="10" selected>10x</option>
-            <option value="25">25x</option>
-            <option value="50">50x</option>
-          </select>
-        </div>
+        <label>مبلغ الشراء (بالدولار $)</label>
+        <input type="number" id="tradeAmountInput" class="input-field" value="50" min="5" step="5">
       </div>
 
       <div class="form-group">
-        <label>سعر السوق التقديري</label>
-        <div class="input-box">
-          <input type="text" id="marketPriceDisplay" value="جاري التحديث..." readonly>
-          <span class="input-addon">USDT</span>
-        </div>
+        <label>الرافعة المالية (مضاعف الربح/الخسارة)</label>
+        <select id="leverageInput" class="input-field">
+          <option value="1">1x (بدون رافعة - عادي)</option>
+          <option value="5">5x</option>
+          <option value="10" selected>10x (مضاعف 10 أضعاف)</option>
+          <option value="20">20x</option>
+        </select>
       </div>
 
-      <div class="form-group">
-        <label>مبلغ الصفقة (الهامش المطلوب)</label>
-        <div class="input-box">
-          <input type="number" id="orderMargin" value="100" min="10" step="10">
-          <span class="input-addon">USDT</span>
-        </div>
-      </div>
-
-      <div style="background: var(--card-inner); padding: 0.75rem; border-radius: 6px; font-size: 0.8rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.4rem;">
-        <div style="display:flex; justify-content:space-between;">
-          <span>القيمة الإجمالية للعقد:</span>
-          <strong id="contractVal" style="color: white;">$1,000.00</strong>
-        </div>
-        <div style="display:flex; justify-content:space-between;">
-          <span>الرسوم التقديرية (0.05%):</span>
-          <strong style="color: white;">$0.50</strong>
-        </div>
-      </div>
-
-      <button class="order-action-btn btn-buy" id="submitOrderBtn" onclick="executeOrder()">
-        تأكيد أمر الشراء (Long)
+      <button class="btn-buy" onclick="handleBuyClick()">
+        <i class="fa-solid fa-arrow-trend-up"></i>
+        تنفيذ أمر شراء (BUY)
       </button>
+
+      <div style="background: var(--card-bg); padding: 0.85rem; border-radius: 6px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.6;">
+        <i class="fa-solid fa-circle-info" style="color: #38bdf8;"></i> 
+        إذا كان المبلغ المطلوب أكبر من رصيدك المتاح، سيرفض النظام تنفيذ العملية لحماية حسابك من الرصيد السالب.
+      </div>
     </aside>
 
   </main>
 
-  <!-- نافذة الإيداع -->
-  <div class="modal" id="depositModal">
-    <div class="modal-card">
-      <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-wallet"></i> إيداع رصيد تداول</h3>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
-        أرسل عملات USDT عبر شبكة TRON (TRC-20) إلى العنوان التالي:
-      </p>
-      <input type="text" value="TYDzsxdSpT5y3vE9Fj4A1qBqZcW8R9pLnX" readonly style="width: 100%; padding: 0.7rem; background: var(--card-inner); border: 1px solid var(--border-color); color: var(--accent); font-size: 0.85rem; border-radius: 6px; direction: ltr; margin-bottom: 1rem;">
-      <button class="btn-action" style="width: 100%; padding: 0.75rem; background: var(--primary);" onclick="mockDeposit()">محاكاة إيداع فوري (1,000$)</button>
-      <button class="btn-action" style="width: 100%; margin-top: 0.5rem;" onclick="closeModal('depositModal')">إلغاء</button>
-    </div>
-  </div>
-
-  <!-- نافذة السحب -->
-  <div class="modal" id="withdrawModal">
-    <div class="modal-card">
-      <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-arrow-up-from-bracket"></i> سحب الرصيد</h3>
-      <div class="form-group" style="margin-bottom: 1rem;">
-        <label>عنوان المحفظة (USDT TRC20)</label>
-        <input type="text" placeholder="مثال: T..." style="width: 100%; padding: 0.6rem; background: var(--card-inner); border: 1px solid var(--border-color); color: white; border-radius: 6px;">
-      </div>
-      <div class="form-group" style="margin-bottom: 1rem;">
-        <label>مبلغ السحب ($)</label>
-        <input type="number" id="withdrawVal" placeholder="الحد الأدنى 50$" style="width: 100%; padding: 0.6rem; background: var(--card-inner); border: 1px solid var(--border-color); color: white; border-radius: 6px;">
-      </div>
-      <button class="btn-action" style="width: 100%; padding: 0.75rem; background: var(--danger);" onclick="handleWithdraw()">تأكيد طلب السحب</button>
-      <button class="btn-action" style="width: 100%; margin-top: 0.5rem;" onclick="closeModal('withdrawModal')">إلغاء</button>
-    </div>
-  </div>
-
-  <!-- تضمين مكتبة TradingView الرسمية للشارت -->
+  <!-- تضمين شارت TradingView -->
   <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 
   <script>
-    // بيانات وحالة المنصة
-    let currentPair = 'BINANCE:BTCUSDT';
-    let currentSide = 'BUY';
-    let balance = 10000.00;
-    let openPositions = [];
-    let approximatePrice = 64500.00; // سعر تقريبي افتتاحي للتطبيق
+    // 1. المتغيرات العامة للمنصة
+    let currentBalance = 500.00;
+    let liveMarketPrice = 65000.00; // سعر مبدئي ريثما يتصل الـ WebSocket
+    let positions = [];
 
-    // تحميل شارت TradingView
-    function loadTradingViewWidget(symbol) {
-      new TradingView.widget({
-        "autosize": true,
-        "symbol": symbol,
-        "interval": "15",
-        "timezone": "Etc/UTC",
-        "theme": "dark",
-        "style": "1",
-        "locale": "ar",
-        "toolbar_bg": "#151924",
-        "enable_publishing": false,
-        "allow_symbol_change": true,
-        "container_id": "tradingview_widget"
-      });
+    // 2. تحميل الرسم البياني الحقيقي
+    new TradingView.widget({
+      "autosize": true,
+      "symbol": "BINANCE:BTCUSDT",
+      "interval": "1",
+      "timezone": "Etc/UTC",
+      "theme": "dark",
+      "style": "1",
+      "locale": "ar",
+      "toolbar_bg": "#131824",
+      "enable_publishing": false,
+      "allow_symbol_change": false,
+      "container_id": "tv_chart_container"
+    });
+
+    // 3. ربط السعر مباشرة بـ WebSocket بينانس للحصول على أسعار حية بالمللي ثانية
+    function connectBinancePriceFeed() {
+      const ws = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@trade');
+      
+      ws.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        const newPrice = parseFloat(data.p);
+        
+        const priceElement = document.getElementById('liveBtcPrice');
+        if (newPrice > liveMarketPrice) {
+          priceElement.style.color = 'var(--primary)';
+        } else if (newPrice < liveMarketPrice) {
+          priceElement.style.color = 'var(--danger)';
+        }
+
+        liveMarketPrice = newPrice;
+        priceElement.innerText = `$${liveMarketPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+        // تحديث أرباح وخسائر الصفقات فور تغير السعر
+        updateLivePnL();
+      };
+
+      ws.onerror = function() {
+        console.log("إعادة الاتصال بالخادم...");
+        setTimeout(connectBinancePriceFeed, 3000);
+      };
     }
+    connectBinancePriceFeed();
 
-    // تبديل الزوج
-    function switchPair(pairSymbol) {
-      currentPair = pairSymbol;
-      document.querySelectorAll('.pair-badge').forEach(el => el.classList.remove('active'));
-      event.currentTarget.classList.add('active');
-      loadTradingViewWidget(pairSymbol);
+    // 4. تنفيذ أمر الشراء مع التحقق من الرصيد
+    function handleBuyClick() {
+      const amount = parseFloat(document.getElementById('tradeAmountInput').value);
+      const leverage = parseInt(document.getElementById('leverageInput').value);
 
-      approximatePrice = pairSymbol.includes('BTC') ? 64500.00 : 3450.00;
-      document.getElementById('marketPriceDisplay').value = `$${approximatePrice.toLocaleString()}`;
-    }
-
-    // تبديل نوع الأمر (شراء / بيع)
-    function setOrderType(side) {
-      currentSide = side;
-      const buyTab = document.getElementById('buyTab');
-      const sellTab = document.getElementById('sellTab');
-      const actionBtn = document.getElementById('submitOrderBtn');
-
-      if (side === 'BUY') {
-        buyTab.classList.add('active');
-        sellTab.classList.remove('active');
-        actionBtn.className = 'order-action-btn btn-buy';
-        actionBtn.innerText = 'تأكيد أمر الشراء (Long)';
-      } else {
-        sellTab.classList.add('active');
-        buyTab.classList.remove('active');
-        actionBtn.className = 'order-action-btn btn-sell';
-        actionBtn.innerText = 'تأكيد أمر البيع (Short)';
-      }
-    }
-
-    // تحديث حساب قيمة العقد عند تعديل المبلغ أو الرافعة
-    function calculateContract() {
-      const margin = parseFloat(document.getElementById('orderMargin').value) || 0;
-      const lev = parseInt(document.getElementById('leverageSelect').value) || 1;
-      const total = margin * lev;
-      document.getElementById('contractVal').innerText = `$${total.toLocaleString()}`;
-    }
-
-    document.getElementById('orderMargin').addEventListener('input', calculateContract);
-    document.getElementById('leverageSelect').addEventListener('change', calculateContract);
-
-    // فتح صفقة جديدة
-    function executeOrder() {
-      const margin = parseFloat(document.getElementById('orderMargin').value);
-      const leverage = parseInt(document.getElementById('leverageSelect').value);
-
-      if (margin > balance) {
-        alert('رصيدك المتاح لا يكفي لفتح هذه الصفقة!');
+      // شرط التحقق من الرصيد
+      if (isNaN(amount) || amount <= 0) {
+        showAlert('يرجى تحديد مبلغ صالح للشراء!', 'danger');
         return;
       }
 
-      balance -= margin;
+      if (amount > currentBalance) {
+        // إذا ما في مال ما يقدر يشتري
+        showAlert(`عذراً، رصيدك غير كافٍ! متاح لديك: $${currentBalance.toFixed(2)} فقط`, 'danger');
+        return;
+      }
+
+      // خصم المبلغ من الرصيد
+      currentBalance -= amount;
       updateBalanceUI();
 
-      const newPosition = {
+      // إنشاء صفقة جديدة
+      const newTrade = {
         id: Date.now(),
-        symbol: currentPair.replace('BINANCE:', ''),
-        side: currentSide,
-        entryPrice: approximatePrice,
-        margin: margin,
+        symbol: 'BTC/USDT',
+        buyPrice: liveMarketPrice,
+        margin: amount,
         leverage: leverage,
-        size: margin * leverage,
-        pnl: 0.00
+        pnl: 0.00,
+        roi: 0.00
       };
 
-      openPositions.push(newPosition);
-      renderPositions();
+      positions.unshift(newTrade);
+      showAlert(`تم الشراء بنجاح بسعر: $${liveMarketPrice.toFixed(2)}! بدأت متابعة الصفقة...`, 'success');
+      renderPositionsTable();
     }
 
-    // إغلاق صفقة
-    function closePosition(posId) {
-      const posIndex = openPositions.findIndex(p => p.id === posId);
-      if (posIndex > -1) {
-        const pos = openPositions[posIndex];
-        const returnAmount = pos.margin + pos.pnl;
-        balance += (returnAmount > 0 ? returnAmount : 0);
-        openPositions.splice(posIndex, 1);
-        updateBalanceUI();
-        renderPositions();
-      }
-    }
+    // 5. حساب الربح والخسارة لحظة بلحظة لكل صفقة
+    function updateLivePnL() {
+      if (positions.length === 0) return;
 
-    // محاكاة تحرك الأسعار وحساب PnL المباشر
-    setInterval(() => {
-      // تذبذب عشوائي طفيف لمحاكاة نبض السوق الحي
-      const deltaPercent = (Math.random() - 0.49) * 0.004;
-      approximatePrice = approximatePrice * (1 + deltaPercent);
-      document.getElementById('marketPriceDisplay').value = `$${approximatePrice.toFixed(2)}`;
+      positions.forEach(pos => {
+        // نسبة تغير السعر = (السعر الحالي - سعر الشراء) / سعر الشراء
+        const priceChangeRatio = (liveMarketPrice - pos.buyPrice) / pos.buyPrice;
+        // الربح أو الخسارة = مبلغ الاستثمار * نسبة التغير * الرافعة المالية
+        pos.pnl = pos.margin * priceChangeRatio * pos.leverage;
+        pos.roi = priceChangeRatio * pos.leverage * 100;
 
-      // تحديث الربح والخسارة للصفقات
-      openPositions.forEach(pos => {
-        const priceDiffRatio = (approximatePrice - pos.entryPrice) / pos.entryPrice;
-        if (pos.side === 'BUY') {
-          pos.pnl = pos.size * priceDiffRatio;
-        } else {
-          pos.pnl = -(pos.size * priceDiffRatio);
+        // تحديث خانة السعر والربح في الجدول مباشرة دون إعادة رسمه بالكامل للحفاظ على الأداء
+        const pnlCell = document.getElementById(`pnl-${pos.id}`);
+        const curPriceCell = document.getElementById(`cur-${pos.id}`);
+
+        if (pnlCell && curPriceCell) {
+          curPriceCell.innerText = `$${liveMarketPrice.toFixed(2)}`;
+
+          const isWinning = pos.pnl >= 0;
+          const sign = isWinning ? '+' : '';
+          pnlCell.className = isWinning ? 'pnl-winning' : 'pnl-losing';
+          pnlCell.innerHTML = `
+            ${sign}$${pos.pnl.toFixed(2)}
+            <span style="font-size: 0.75rem; margin-right: 4px;">(${sign}${pos.roi.toFixed(1)}%)</span>
+          `;
         }
       });
+    }
 
-      renderPositions();
-    }, 2000);
+    // 6. رسم جدول الصفقات
+    function renderPositionsTable() {
+      const tbody = document.getElementById('positionsTableBody');
+      const countEl = document.getElementById('activeTradesCount');
+      countEl.innerText = `${positions.length} صفقات`;
 
-    // عرض الصفقات المفتوحة في الجدول
-    function renderPositions() {
-      const tbody = document.getElementById('positionsTable');
-      document.getElementById('activePositionsCount').innerText = `${openPositions.length} صفقات نشطة`;
-
-      if (openPositions.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 1.5rem;">لا توجد صفقات مفتوحة حالياً</td></tr>`;
+      if (positions.length === 0) {
+        tbody.innerHTML = `
+          <tr id="emptyRow">
+            <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 2rem;">
+              لا توجد صفقات جارية. اضغط على زر الشراء لفتح صفقة جديدة.
+            </td>
+          </tr>
+        `;
         return;
       }
 
       tbody.innerHTML = '';
-      openPositions.forEach(pos => {
+      positions.forEach(pos => {
+        const isWinning = pos.pnl >= 0;
+        const sign = isWinning ? '+' : '';
         const tr = document.createElement('tr');
-        const pnlColor = pos.pnl >= 0 ? 'var(--primary)' : 'var(--danger)';
-        const pnlSign = pos.pnl >= 0 ? '+' : '';
         tr.innerHTML = `
           <td><strong>${pos.symbol}</strong></td>
-          <td class="${pos.side === 'BUY' ? 'badge-buy' : 'badge-sell'}">${pos.side === 'BUY' ? 'شراء (Long)' : 'بيع (Short)'}</td>
-          <td>$${pos.entryPrice.toFixed(2)}</td>
-          <td>$${pos.size.toFixed(2)}</td>
-          <td>${pos.leverage}x</td>
-          <td style="color: ${pnlColor}; font-weight: 800;">${pnlSign}$${pos.pnl.toFixed(2)}</td>
-          <td><button class="btn-close-pos" onclick="closePosition(${pos.id})">إغلاق</button></td>
+          <td><span style="color: var(--primary); font-weight: 700;">شراء (${pos.leverage}x)</span></td>
+          <td>$${pos.buyPrice.toFixed(2)}</td>
+          <td id="cur-${pos.id}">$${liveMarketPrice.toFixed(2)}</td>
+          <td>$${pos.margin.toFixed(2)}</td>
+          <td id="pnl-${pos.id}" class="${isWinning ? 'pnl-winning' : 'pnl-losing'}">
+            ${sign}$${pos.pnl.toFixed(2)}
+            <span style="font-size: 0.75rem; margin-right: 4px;">(${sign}${pos.roi.toFixed(1)}%)</span>
+          </td>
+          <td>
+            <button class="btn-close" onclick="closePosition(${pos.id})">إغلاق وبيع</button>
+          </td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    function updateBalanceUI() {
-      document.getElementById('userBalance').innerText = `$${balance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-    }
+    // 7. إغلاق الصفقة وجني الأرباح أو تقبل الخسارة
+    function closePosition(tradeId) {
+      const idx = positions.findIndex(p => p.id === tradeId);
+      if (idx !== -1) {
+        const trade = positions[idx];
+        const returnAmount = trade.margin + trade.pnl;
 
-    // Modal controls & Deposits
-    function openModal(id) { document.getElementById(id).classList.add('active'); }
-    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        // إعادة رأس المال مع الربح أو الخسارة إلى المحفظة
+        if (returnAmount > 0) {
+          currentBalance += returnAmount;
+        }
 
-    function mockDeposit() {
-      balance += 1000;
-      updateBalanceUI();
-      closeModal('depositModal');
-      alert('تم إيداع $1,000 USDT بنجاح في المحفظة!');
-    }
+        const msg = trade.pnl >= 0 
+          ? `أغلقت الصفقة بربح قدره: +$${trade.pnl.toFixed(2)}!` 
+          : `أغلقت الصفقة بخسارة قدرها: -$${Math.abs(trade.pnl).toFixed(2)}`;
 
-    function handleWithdraw() {
-      const val = parseFloat(document.getElementById('withdrawVal').value) || 0;
-      if (val > balance) {
-        alert('الرصيد غير كافٍ!');
-        return;
+        showAlert(msg, trade.pnl >= 0 ? 'success' : 'danger');
+
+        positions.splice(idx, 1);
+        updateBalanceUI();
+        renderPositionsTable();
       }
-      balance -= val;
-      updateBalanceUI();
-      closeModal('withdrawModal');
-      alert('تم إرسال طلب السحب بنجاح!');
     }
 
-    // تشغيل الشارت أول مرة
-    loadTradingViewWidget(currentPair);
-    document.getElementById('marketPriceDisplay').value = `$${approximatePrice.toLocaleString()}`;
-    calculateContract();
+    // تحديث الرصيد على الواجهة
+    function updateBalanceUI() {
+      document.getElementById('balanceDisplay').innerText = `$${currentBalance.toFixed(2)}`;
+    }
+
+    // إضافة رصيد إضافي للتجربة
+    function addFunds() {
+      currentBalance += 100;
+      updateBalanceUI();
+      showAlert('تمت إضافة 100$ لرصيدك بنجاح!', 'success');
+    }
+
+    // إظهار التنبيهات
+    function showAlert(message, type) {
+      const toast = document.getElementById('toastAlert');
+      const msg = document.getElementById('toastMsg');
+      const icon = document.getElementById('toastIcon');
+
+      toast.className = `alert-toast alert-${type}`;
+      msg.innerText = message;
+      icon.className = type === 'success' ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-exclamation';
+
+      toast.style.display = 'flex';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3500);
+    }
   </script>
 </body>
 </html>
