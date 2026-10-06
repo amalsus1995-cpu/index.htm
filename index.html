@@ -3,346 +3,639 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>متجر فالكون للخدمات</title>
+  <title>متجر المتابعين | خدمات التواصل الاجتماعي</title>
   <style>
+    :root {
+      --primary: #f59e0b;
+      --primary-dark: #d97706;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --star: #f59e0b;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     body {
-      background-color: #0b0f19;
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 15px;
+      background-color: var(--bg);
+      color: var(--text);
+      padding-bottom: 60px;
     }
 
-    .container {
-      width: 100%;
-      max-width: 500px;
-      background: #151c2c;
-      border: 1px solid #232d42;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .header h1 {
-      font-size: 22px;
-      margin-bottom: 6px;
-      color: #38bdf8;
-    }
-
-    .header p {
-      font-size: 13px;
-      color: #94a3b8;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .tab-btn {
-      flex: 1;
-      padding: 10px 5px;
-      background: #0b0f19;
-      color: #94a3b8;
-      border: 1px solid #232d42;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    .tab-btn.active {
-      background: #2563eb;
-      color: #ffffff;
-      border-color: #2563eb;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 13px;
-      color: #cbd5e1;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      background: #0b0f19;
-      border: 1px solid #232d42;
-      border-radius: 8px;
-      color: #ffffff;
-      font-size: 14px;
-      outline: none;
-    }
-
-    input:focus, select:focus {
-      border-color: #38bdf8;
-    }
-
-    .price-box {
-      background: #0b0f19;
-      border: 1px dashed #334155;
-      padding: 14px;
-      border-radius: 8px;
+    /* الشريط العلوي */
+    header {
+      background: #ffffff;
+      padding: 12px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      border-bottom: 2px solid #fed7aa;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
     }
 
-    .price-box span {
-      font-size: 14px;
-      color: #94a3b8;
-    }
-
-    .price-value {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ea580c;
       font-size: 20px;
-      font-weight: bold;
-      color: #22c55e;
+      font-weight: 800;
     }
 
-    .submit-btn {
-      width: 100%;
-      padding: 14px;
-      background: #2563eb;
-      border: none;
-      border-radius: 8px;
-      color: #ffffff;
-      font-size: 15px;
+    .brand-icon {
+      font-size: 24px;
+    }
+
+    .header-icons {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .circle-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #0d9488;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: bold;
+      font-size: 14px;
+    }
+
+    .menu-icon {
+      font-size: 22px;
+      color: #475569;
       cursor: pointer;
     }
 
-    .submit-btn:hover {
-      background: #1d4ed8;
+    .main-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 16px;
     }
 
-    /* نافذة التأكيد */
+    /* رصيد الحساب */
+    .balance-bar {
+      display: flex;
+      justify-content: space-around;
+      background: #ffffff;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .balance-item h4 {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+
+    .balance-item span {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .btn-charge {
+      width: 100%;
+      background: linear-gradient(135deg, #f59e0b, #ea580c);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
+      margin-bottom: 20px;
+    }
+
+    /* أقسام المنصات (أيقونات 3D) */
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 4px;
+      height: 16px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .cat-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+
+    .cat-card:active, .cat-card.active {
+      transform: scale(0.98);
+      border-color: var(--primary);
+      background: #fffbeb;
+    }
+
+    .cat-card img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      margin-bottom: 8px;
+    }
+
+    .cat-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    /* شبكة بطاقات المنتجات */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    .badge-pop {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #ef4444;
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-bottom-left-radius: 10px;
+      z-index: 2;
+    }
+
+    .card-top {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      padding: 18px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .card-top img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      margin-bottom: 6px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+    }
+
+    .card-top span {
+      font-size: 11px;
+      opacity: 0.9;
+    }
+
+    .card-body {
+      padding: 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 8px;
+      min-height: 36px;
+    }
+
+    .stars {
+      color: var(--star);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .card-footer {
+      border-top: 1px solid #f1f5f9;
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .price-tag {
+      font-size: 13px;
+      font-weight: 800;
+      color: #ea580c;
+    }
+
+    .price-tag small {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: normal;
+    }
+
+    .order-action-btn {
+      background: #f59e0b;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* نافذة الشراء المنبثقة */
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.6);
       align-items: center;
       justify-content: center;
-      padding: 15px;
+      padding: 16px;
       z-index: 100;
+      backdrop-filter: blur(2px);
     }
 
     .modal-box {
-      background: #151c2c;
-      border: 1px solid #232d42;
-      border-radius: 14px;
-      padding: 20px;
+      background: #ffffff;
+      border-radius: 18px;
       width: 100%;
-      max-width: 400px;
-      text-align: center;
+      max-width: 420px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
-    .modal-box h3 {
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-
-    .details-text {
-      font-size: 13px;
-      color: #94a3b8;
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 15px;
-      line-height: 1.6;
+    }
+
+    .modal-header h3 {
+      font-size: 16px;
+      color: #ea580c;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+      text-align: right;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
     }
 
     .wallet-box {
-      background: #0b0f19;
-      border: 1px solid #232d42;
-      padding: 8px;
-      border-radius: 6px;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      padding: 10px;
+      border-radius: 8px;
       font-family: monospace;
       font-size: 11px;
-      color: #38bdf8;
+      color: #b45309;
       word-break: break-all;
-      margin-bottom: 15px;
+      margin: 10px 0;
+      text-align: center;
     }
 
-    .wa-btn {
+    .btn-wa {
       display: block;
       width: 100%;
-      padding: 12px;
       background: #22c55e;
-      color: #ffffff;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 10px;
       text-decoration: none;
-      border-radius: 8px;
       font-weight: bold;
       font-size: 14px;
-      margin-bottom: 8px;
+      margin-top: 10px;
     }
 
-    .close-btn {
+    .btn-close {
       width: 100%;
+      background: #f1f5f9;
+      border: none;
+      color: #475569;
       padding: 10px;
-      background: transparent;
-      border: 1px solid #334155;
-      color: #94a3b8;
-      border-radius: 8px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px;
+      margin-top: 6px;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <div class="header">
-      <h1>منصة فالكون للخدمات</h1>
-      <p>شحن تيك توك، انستغرام، وسناب شات بدون كلمة مرور</p>
+  <!-- شريط العنوان -->
+  <header>
+    <div class="brand">
+      <span class="brand-icon">🛍️</span>
+      <span>متجر المتابعين</span>
+    </div>
+    <div class="header-icons">
+      <div class="circle-icon">I</div>
+      <div class="menu-icon">☰</div>
+    </div>
+  </header>
+
+  <div class="main-container">
+
+    <!-- رصيد الحساب وزر الشحن -->
+    <div class="balance-bar">
+      <div class="balance-item">
+        <h4>أنفقت معنا</h4>
+        <span>$0.00</span>
+      </div>
+      <div class="balance-item">
+        <h4>جار استخدامه</h4>
+        <span>$0.00</span>
+      </div>
+      <div class="balance-item">
+        <h4>رصيدك الآن</h4>
+        <span>$0.06</span>
+      </div>
     </div>
 
-    <!-- أزرار المنصات -->
-    <div class="tabs">
-      <button type="button" class="tab-btn active" onclick="setPlatform('tiktok', this)">تيك توك</button>
-      <button type="button" class="tab-btn" onclick="setPlatform('instagram', this)">انستغرام</button>
-      <button type="button" class="tab-btn" onclick="setPlatform('snapchat', this)">سناب شات</button>
+    <button class="btn-charge" onclick="alert('قم بالطلب أولاً وسيتم تفعيل حسابك مباشرة.')">+ شحن الرصيد الآن</button>
+
+    <!-- أقسام المنصات الثلاثية الأبعاد -->
+    <div class="section-title">اختر المنصة</div>
+    <div class="categories-grid">
+      <div class="cat-card active" onclick="loadServices('tiktok', this)">
+        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="تيك توك">
+        <h3>تيك توك</h3>
+      </div>
+      <div class="cat-card" onclick="loadServices('instagram', this)">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="انستجرام">
+        <h3>انستغرام</h3>
+      </div>
+      <div class="cat-card" onclick="loadServices('snapchat', this)">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384068.png" alt="سناب شات">
+        <h3>سناب شات</h3>
+      </div>
+      <div class="cat-card" onclick="loadServices('popular', this)">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="الأكثر طلباً">
+        <h3>الأكثر طلباً</h3>
+      </div>
     </div>
 
-    <!-- نموذج الإدخال -->
-    <form id="orderForm" onsubmit="submitForm(event)">
-      <div class="form-group">
-        <label id="inputLabel">اسم المستخدم أو رابط الحساب (تيك توك)</label>
-        <input type="text" id="accountInput" placeholder="@username" required>
-      </div>
+    <!-- شبكة الخدمات والأسعار -->
+    <div class="section-title" id="servicesTitle">خدمات تيك توك</div>
+    <div class="products-grid" id="productsContainer"></div>
 
-      <div class="form-group">
-        <label>اختر الباقة المطلوبة</label>
-        <select id="packageSelect" onchange="calculatePrice()"></select>
-      </div>
-
-      <div class="price-box">
-        <span>السعر المطلوب:</span>
-        <span class="price-value" id="displayPrice">0.00 $</span>
-      </div>
-
-      <button type="submit" class="submit-btn">إتمام الطلب الآن</button>
-    </form>
   </div>
 
-  <!-- نافذة الدفع -->
+  <!-- نافذة تأكيد الطلب -->
   <div class="modal" id="orderModal">
     <div class="modal-box">
-      <h3>تأكيد الطلب</h3>
-      <div class="details-text" id="orderSummary"></div>
+      <div class="modal-header">
+        <h3 id="modalServiceTitle">طلب الخدمة</h3>
+        <span style="cursor:pointer;" onclick="closeModal()">✕</span>
+      </div>
 
-      <label style="font-size: 12px; display: block; margin-bottom: 4px;">عنوان المحفظة (USDT - TRC20):</label>
+      <div class="form-group">
+        <label>رابط الحساب أو اسم المستخدم (Username):</label>
+        <input type="text" id="targetAccount" placeholder="@username أو الرابط">
+      </div>
+
+      <div class="form-group">
+        <label>السعر الإجمالي:</label>
+        <div style="font-size: 18px; font-weight: bold; color: #ea580c;" id="modalPrice"></div>
+      </div>
+
+      <label style="font-size: 12px; color: #64748b;">الدفع المباشر عبر (USDT - TRC20):</label>
       <div class="wallet-box" id="walletAddress">TFxxxxxxxYourTRC20Addressxxxxxxxxxx</div>
 
-      <a id="whatsappLink" class="wa-btn" target="_blank">تأكيد عبر واتساب</a>
-      <button type="button" class="close-btn" onclick="hideModal()">إغلاق</button>
+      <a id="waSendBtn" class="btn-wa" target="_blank">تأكيد عبر واتساب</a>
+      <button class="btn-close" onclick="closeModal()">إلغاء</button>
     </div>
   </div>
 
   <script>
-    // الإعدادات المباشرة
-    var myWhatsApp = "905XXXXXXXXX"; // ضع رقمك الدولي هنا
-    var myTRC20 = "TFxxxxxxxYourTRC20Addressxxxxxxxxxx"; // ضع عنوان محفظتك هنا
+    // إعداداتك الخاصة
+    const CONFIG = {
+      whatsapp: "905XXXXXXXXX", // رقم هاتفك الدولي
+      usdtWallet: "TFxxxxxxxYourTRC20Addressxxxxxxxxxx" // عنوان محفظتك
+    };
 
-    var data = {
+    // بيانات الباقات والأسعار كما في التصميم
+    const SERVICES = {
       tiktok: [
-        { title: "500 متابع سريع", price: 2.5 },
-        { title: "1000 متابع مع ضمان", price: 4.5 },
-        { title: "2500 متابع مميز", price: 9.9 },
-        { title: "5000 مشاهدة للفيديوهات", price: 1.5 }
+        {
+          title: "أرخص خدمة زيادة متابعين تيك توك (الأرخص عالمياً)",
+          rate: "10 / $0.03",
+          price: 0.03,
+          stars: "★★★★★",
+          icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png",
+          badge: ""
+        },
+        {
+          title: "خدمة زيادة متابعين تيك توك ممتازة لتكبير الحساب + ضمان",
+          rate: "1000 / $5.73",
+          price: 5.73,
+          stars: "★★★★★",
+          icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png",
+          badge: "الأكثر طلباً"
+        },
+        {
+          title: "أفضل خدمة متابعين تيك توك (عرب حقيقيين وتفاعل) + ضمان",
+          rate: "1000 / $6.98",
+          price: 6.98,
+          stars: "★★★★★",
+          icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png",
+          badge: ""
+        },
+        {
+          title: "باقة 5000 مشاهدة سريعة للفيديوهات اكسبلور",
+          rate: "5000 / $1.20",
+          price: 1.20,
+          stars: "★★★★★",
+          icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png",
+          badge: ""
+        }
       ],
       instagram: [
-        { title: "500 متابع مكس", price: 2.0 },
-        { title: "1000 متابع ضمان تعويض", price: 3.8 },
-        { title: "2000 متابع VIP", price: 7.0 },
-        { title: "1000 لايك", price: 1.2 }
+        {
+          title: "متابعين انستغرام مكس مظهر حقيقي وسرعة فائقة",
+          rate: "1000 / $3.50",
+          price: 3.50,
+          stars: "★★★★★",
+          icon: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png",
+          badge: "مميز"
+        },
+        {
+          title: "متابعين انستغرام VIP ضمان تعويض النقص 60 يوم",
+          rate: "1000 / $4.90",
+          price: 4.90,
+          stars: "★★★★★",
+          icon: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png",
+          badge: ""
+        }
       ],
       snapchat: [
-        { title: "500 إضافة سناب", price: 4.0 },
-        { title: "1000 متابع ملف تعريفي", price: 7.5 },
-        { title: "2500 متابع ملف تعريفي", price: 16.0 },
-        { title: "5000 مشاهدة ستوري", price: 5.0 }
+        {
+          title: "إضافات ومتابعين سناب شات للملف التعريفي حقيقي",
+          rate: "500 / $6.50",
+          price: 6.50,
+          stars: "★★★★★",
+          icon: "https://cdn-icons-png.flaticon.com/512/1384/1384068.png",
+          badge: "حصري"
+        },
+        {
+          title: "مشاهدات قصص ستوري سناب شات خليجي وسريع",
+          rate: "1000 / $4.20",
+          price: 4.20,
+          stars: "★★★★★",
+          icon: "https://cdn-icons-png.flaticon.com/512/1384/1384068.png",
+          badge: ""
+        }
+      ],
+      popular: [
+        {
+          title: "خدمة زيادة متابعين تيك توك ممتازة لتكبير الحساب",
+          rate: "1000 / $5.73",
+          price: 5.73,
+          stars: "★★★★★",
+          icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png",
+          badge: "الأكثر طلباً"
+        },
+        {
+          title: "متابعين انستغرام VIP ضمان تعويض النقص",
+          rate: "1000 / $4.90",
+          price: 4.90,
+          stars: "★★★★★",
+          icon: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png",
+          badge: "VIP"
+        }
       ]
     };
 
-    var current = 'tiktok';
+    let activeCategory = 'tiktok';
 
-    function setPlatform(platform, btn) {
-      current = platform;
-      var buttons = document.querySelectorAll('.tab-btn');
-      for (var i = 0; i < buttons.length; i++) {
-        buttons[i].classList.remove('active');
-      }
-      btn.classList.add('active');
+    function loadServices(category, element) {
+      activeCategory = category;
+      document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+      if(element) element.classList.add('active');
 
-      var label = document.getElementById('inputLabel');
-      if (platform === 'tiktok') label.innerText = "اسم المستخدم أو رابط الحساب (تيك توك)";
-      if (platform === 'instagram') label.innerText = "اسم المستخدم أو رابط الحساب (انستغرام)";
-      if (platform === 'snapchat') label.innerText = "اسم المستخدم (سناب شات)";
+      const titles = {
+        tiktok: "خدمات تيك توك",
+        instagram: "خدمات انستغرام",
+        snapchat: "خدمات سناب شات",
+        popular: "الخدمات الأكثر طلباً"
+      };
+      document.getElementById('servicesTitle').innerText = titles[category];
 
-      updateOptions();
+      const container = document.getElementById('productsContainer');
+      container.innerHTML = "";
+
+      SERVICES[category].forEach((item, index) => {
+        const badgeHTML = item.badge ? `<div class="badge-pop">${item.badge}</div>` : '';
+        const card = `
+          <div class="product-card">
+            ${badgeHTML}
+            <div class="card-top">
+              <img src="${item.icon}" alt="Platform">
+              <span>زيادة متابعين</span>
+            </div>
+            <div class="card-body">
+              <div class="card-title">${item.title}</div>
+              <div class="stars">${item.stars}</div>
+              <div class="card-footer">
+                <span class="price-tag">${item.rate}</span>
+                <button class="order-action-btn" onclick="openOrderModal('${category}', ${index})">طلب</button>
+              </div>
+            </div>
+          </div>
+        `;
+        container.innerHTML += card;
+      });
     }
 
-    function updateOptions() {
-      var select = document.getElementById('packageSelect');
-      select.innerHTML = "";
-      var list = data[current];
-      for (var i = 0; i < list.length; i++) {
-        var opt = document.createElement('option');
-        opt.value = i;
-        opt.innerText = list[i].title + " - (" + list[i].price + " $)";
-        select.appendChild(opt);
-      }
-      calculatePrice();
-    }
-
-    function calculatePrice() {
-      var select = document.getElementById('packageSelect');
-      var index = select.value;
-      if (data[current][index]) {
-        document.getElementById('displayPrice').innerText = data[current][index].price.toFixed(2) + " $";
-      }
-    }
-
-    function submitForm(e) {
-      e.preventDefault();
-      var acc = document.getElementById('accountInput').value;
-      var index = document.getElementById('packageSelect').value;
-      var pkg = data[current][index];
-
-      var summary = "الخدمة: " + current.toUpperCase() + "<br>الحساب: " + acc + "<br>الباقة: " + pkg.title + "<br>المبلغ المطلوب: " + pkg.price + " $";
-      document.getElementById('orderSummary').innerHTML = summary;
-      document.getElementById('walletAddress').innerText = myTRC20;
-
-      var waText = encodeURIComponent("طلب جديد من المتجر:\n- المنصة: " + current + "\n- الحساب: " + acc + "\n- الباقة: " + pkg.title + "\n- السعر: " + pkg.price + " $");
-      document.getElementById('whatsappLink').href = "https://wa.me/" + myWhatsApp + "?text=" + waText;
+    function openOrderModal(category, index) {
+      const item = SERVICES[category][index];
+      document.getElementById('modalServiceTitle').innerText = item.title;
+      document.getElementById('modalPrice').innerText = item.rate;
+      document.getElementById('walletAddress').innerText = CONFIG.usdtWallet;
+      
+      const sendBtn = document.getElementById('waSendBtn');
+      sendBtn.onclick = function() {
+        const account = document.getElementById('targetAccount').value.trim();
+        if(!account) {
+          alert('يرجى إدخال اسم الحساب أو الرابط');
+          return false;
+        }
+        const msg = encodeURIComponent(`طلب جديد:\nالخدمة: ${item.title}\nالحساب: ${account}\nالسعر: ${item.rate}`);
+        sendBtn.href = `https://wa.me/${CONFIG.whatsapp}?text=${msg}`;
+      };
 
       document.getElementById('orderModal').style.display = 'flex';
     }
 
-    function hideModal() {
+    function closeModal() {
       document.getElementById('orderModal').style.display = 'none';
     }
 
-    // تشغيل القوائم تلقائياً
-    updateOptions();
+    // تشغيل الصفحة مباشرة
+    loadServices('tiktok');
   </script>
 </body>
 </html>
