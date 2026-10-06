@@ -29,7 +29,6 @@
       padding-bottom: 60px;
     }
 
-    /* الشريط العلوي */
     header {
       background: #ffffff;
       padding: 12px 18px;
@@ -50,10 +49,6 @@
       color: #ea580c;
       font-size: 20px;
       font-weight: 800;
-    }
-
-    .brand-icon {
-      font-size: 24px;
     }
 
     .header-icons {
@@ -87,7 +82,6 @@
       padding: 16px;
     }
 
-    /* رصيد الحساب */
     .balance-bar {
       display: flex;
       justify-content: space-around;
@@ -103,7 +97,6 @@
       font-size: 12px;
       color: var(--text-muted);
       margin-bottom: 4px;
-      font-weight: 500;
     }
 
     .balance-item span {
@@ -126,7 +119,6 @@
       margin-bottom: 20px;
     }
 
-    /* أقسام المنصات (أيقونات 3D) */
     .section-title {
       font-size: 16px;
       font-weight: 700;
@@ -161,15 +153,14 @@
       transition: transform 0.15s, border-color 0.15s;
     }
 
-    .cat-card:active, .cat-card.active {
-      transform: scale(0.98);
+    .cat-card.active {
       border-color: var(--primary);
       background: #fffbeb;
     }
 
     .cat-card img {
-      width: 70px;
-      height: 70px;
+      width: 65px;
+      height: 65px;
       object-fit: contain;
       margin-bottom: 8px;
     }
@@ -179,7 +170,6 @@
       font-weight: 700;
     }
 
-    /* شبكة بطاقات المنتجات */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -194,7 +184,6 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
 
     .badge-pop {
@@ -205,14 +194,14 @@
       color: white;
       font-size: 10px;
       font-weight: bold;
-      padding: 4px 10px;
-      border-bottom-left-radius: 10px;
+      padding: 4px 8px;
+      border-bottom-left-radius: 8px;
       z-index: 2;
     }
 
     .card-top {
       background: linear-gradient(135deg, #f59e0b, #d97706);
-      padding: 18px 10px;
+      padding: 16px 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -221,16 +210,14 @@
     }
 
     .card-top img {
-      width: 50px;
-      height: 50px;
+      width: 48px;
+      height: 48px;
       object-fit: contain;
       margin-bottom: 6px;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
     }
 
     .card-top span {
       font-size: 11px;
-      opacity: 0.9;
     }
 
     .card-body {
@@ -251,8 +238,8 @@
 
     .stars {
       color: var(--star);
-      font-size: 13px;
-      margin-bottom: 10px;
+      font-size: 12px;
+      margin-bottom: 8px;
     }
 
     .card-footer {
@@ -269,50 +256,47 @@
       color: #ea580c;
     }
 
-    .price-tag small {
-      font-size: 10px;
-      color: var(--text-muted);
-      font-weight: normal;
-    }
-
     .order-action-btn {
       background: #f59e0b;
       color: white;
       border: none;
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 8px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
     }
 
-    /* نافذة الشراء المنبثقة */
+    /* نافذة الدفع */
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       align-items: center;
       justify-content: center;
       padding: 16px;
       z-index: 100;
-      backdrop-filter: blur(2px);
+      backdrop-filter: blur(3px);
     }
 
     .modal-box {
       background: #ffffff;
-      border-radius: 18px;
+      border-radius: 20px;
       width: 100%;
-      max-width: 420px;
+      max-width: 460px;
       padding: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
     }
 
     .modal-header h3 {
@@ -321,38 +305,89 @@
     }
 
     .form-group {
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       text-align: right;
     }
 
     .form-group label {
       display: block;
-      font-size: 13px;
-      margin-bottom: 6px;
+      font-size: 12px;
+      margin-bottom: 5px;
       color: #475569;
       font-weight: 600;
     }
 
     .form-group input {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 14px;
+      border-radius: 8px;
+      font-size: 13px;
       outline: none;
     }
 
-    .wallet-box {
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      padding: 10px;
+    /* تبويبات الدفع */
+    .pay-methods {
+      display: flex;
+      gap: 6px;
+      margin: 12px 0;
+    }
+
+    .pay-tab {
+      flex: 1;
+      padding: 8px 4px;
+      background: #f1f5f9;
+      border: 1px solid var(--border);
       border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #475569;
+    }
+
+    .pay-tab.active {
+      background: #1e293b;
+      color: white;
+      border-color: #1e293b;
+    }
+
+    .pay-content {
+      display: none;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      text-align: right;
+      font-size: 12px;
+    }
+
+    .pay-content.show {
+      display: block;
+    }
+
+    .copy-chip {
+      background: #ffffff;
+      border: 1px dashed #cbd5e1;
+      padding: 6px 10px;
+      border-radius: 6px;
       font-family: monospace;
+      font-size: 12px;
+      margin: 4px 0 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #0f172a;
+    }
+
+    .copy-btn {
+      background: #e2e8f0;
+      border: none;
+      padding: 3px 8px;
+      border-radius: 4px;
       font-size: 11px;
-      color: #b45309;
-      word-break: break-all;
-      margin: 10px 0;
-      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
     }
 
     .btn-wa {
@@ -366,29 +401,27 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 14px;
-      margin-top: 10px;
+      margin-top: 6px;
     }
 
     .btn-close {
       width: 100%;
-      background: #f1f5f9;
-      border: none;
-      color: #475569;
-      padding: 10px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 13px;
-      margin-top: 6px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: #64748b;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      margin-top: 8px;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <!-- شريط العنوان -->
   <header>
     <div class="brand">
-      <span class="brand-icon">🛍️</span>
+      <span>🛍️</span>
       <span>متجر المتابعين</span>
     </div>
     <div class="header-icons">
@@ -398,8 +431,6 @@
   </header>
 
   <div class="main-container">
-
-    <!-- رصيد الحساب وزر الشحن -->
     <div class="balance-bar">
       <div class="balance-item">
         <h4>أنفقت معنا</h4>
@@ -415,9 +446,8 @@
       </div>
     </div>
 
-    <button class="btn-charge" onclick="alert('قم بالطلب أولاً وسيتم تفعيل حسابك مباشرة.')">+ شحن الرصيد الآن</button>
+    <button class="btn-charge" onclick="alert('اختر الخدمة المطلوبة واضغط طلب لإتمام الدفع.')">+ شحن الرصيد الآن</button>
 
-    <!-- أقسام المنصات الثلاثية الأبعاد -->
     <div class="section-title">اختر المنصة</div>
     <div class="categories-grid">
       <div class="cat-card active" onclick="loadServices('tiktok', this)">
@@ -438,141 +468,103 @@
       </div>
     </div>
 
-    <!-- شبكة الخدمات والأسعار -->
     <div class="section-title" id="servicesTitle">خدمات تيك توك</div>
     <div class="products-grid" id="productsContainer"></div>
-
   </div>
 
-  <!-- نافذة تأكيد الطلب -->
+  <!-- نافذة الدفع المتكاملة -->
   <div class="modal" id="orderModal">
     <div class="modal-box">
       <div class="modal-header">
-        <h3 id="modalServiceTitle">طلب الخدمة</h3>
-        <span style="cursor:pointer;" onclick="closeModal()">✕</span>
+        <h3 id="modalServiceTitle">إتمام الطلب والدفع</h3>
+        <span style="cursor:pointer; font-weight:bold;" onclick="closeModal()">✕</span>
       </div>
 
       <div class="form-group">
         <label>رابط الحساب أو اسم المستخدم (Username):</label>
-        <input type="text" id="targetAccount" placeholder="@username أو الرابط">
+        <input type="text" id="targetAccount" placeholder="@username أو الرابط المباشر">
       </div>
 
       <div class="form-group">
-        <label>السعر الإجمالي:</label>
-        <div style="font-size: 18px; font-weight: bold; color: #ea580c;" id="modalPrice"></div>
+        <label>المبلغ المطلوب:</label>
+        <div style="font-size: 17px; font-weight: bold; color: #ea580c;" id="modalPrice"></div>
       </div>
 
-      <label style="font-size: 12px; color: #64748b;">الدفع المباشر عبر (USDT - TRC20):</label>
-      <div class="wallet-box" id="walletAddress">TFxxxxxxxYourTRC20Addressxxxxxxxxxx</div>
+      <!-- أزرار اختيار وسيلة الدفع -->
+      <label style="font-size: 12px; font-weight:bold; color: #334155;">اختر وسيلة التحويل:</label>
+      <div class="pay-methods">
+        <button type="button" class="pay-tab active" onclick="switchPayTab('card', this)">💳 فيزا / ماستر</button>
+        <button type="button" class="pay-tab" onclick="switchPayTab('bank', this)">🏦 تحويل بنكي</button>
+        <button type="button" class="pay-tab" onclick="switchPayTab('crypto', this)">🪙 USDT</button>
+      </div>
 
-      <a id="waSendBtn" class="btn-wa" target="_blank">تأكيد عبر واتساب</a>
+      <!-- محتوى الدفع بالبطاقة -->
+      <div class="pay-content show" id="tab-card">
+        <p style="margin-bottom: 8px; color: #475569;">ادفع بأمان عبر بطاقة <b>Visa</b> أو <b>Mastercard</b>:</p>
+        <button type="button" onclick="goToCardPayment()" style="width: 100%; background: #1e293b; color: white; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+          الانتقال لبوابة الدفع بالبطاقة
+        </button>
+      </div>
+
+      <!-- محتوى التحويل البنكي -->
+      <div class="pay-content" id="tab-bank">
+        <div style="color: #64748b; font-size: 11px;">اسم البنك: <b style="color: #0f172a;" id="bankNameDisplay">Ziraat Bankası</b></div>
+        <div style="color: #64748b; font-size: 11px; margin-top: 3px;">اسم المستفيد: <b style="color: #0f172a;" id="bankOwnerDisplay">Huseyin Hilal</b></div>
+        <div class="copy-chip">
+          <span id="ibanDisplay">TR000000000000000000000000</span>
+          <button class="copy-btn" onclick="copyText('ibanDisplay')">نسخ</button>
+        </div>
+      </div>
+
+      <!-- محتوى العملات الرقمية -->
+      <div class="pay-content" id="tab-crypto">
+        <div style="color: #64748b; font-size: 11px;">شبكة الدفع: <b style="color: #0f172a;">Tron (TRC20)</b></div>
+        <div class="copy-chip">
+          <span id="cryptoWalletDisplay">TFxxxxxxxYourTRC20Addressxxxxxxxxxx</span>
+          <button class="copy-btn" onclick="copyText('cryptoWalletDisplay')">نسخ</button>
+        </div>
+      </div>
+
+      <a id="waSendBtn" class="btn-wa" target="_blank">تأكيد الطلب عبر واتساب</a>
       <button class="btn-close" onclick="closeModal()">إلغاء</button>
     </div>
   </div>
 
   <script>
-    // إعداداتك الخاصة
-    const CONFIG = {
-      whatsapp: "905XXXXXXXXX", // رقم هاتفك الدولي
-      usdtWallet: "TFxxxxxxxYourTRC20Addressxxxxxxxxxx" // عنوان محفظتك
+    // بياناتك الخاصة - يمكنك تعديلها مباشرة هنا
+    const SETTINGS = {
+      whatsapp: "905XXXXXXXXX", // رقمك الدولي لاستقبال الطلبات
+      cardPaymentUrl: "", // رابط بوابة الدفع إن وجد
+      bankName: "Ziraat Bankası", // اسم بنكك
+      bankOwner: "Hussein", // اسم صاحب الحساب
+      iban: "TR000000000000000000000000", // رقم الآيبان
+      cryptoWallet: "TFxxxxxxxYourTRC20Addressxxxxxxxxxx" // عنوان USDT
     };
 
-    // بيانات الباقات والأسعار كما في التصميم
     const SERVICES = {
       tiktok: [
-        {
-          title: "أرخص خدمة زيادة متابعين تيك توك (الأرخص عالمياً)",
-          rate: "10 / $0.03",
-          price: 0.03,
-          stars: "★★★★★",
-          icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png",
-          badge: ""
-        },
-        {
-          title: "خدمة زيادة متابعين تيك توك ممتازة لتكبير الحساب + ضمان",
-          rate: "1000 / $5.73",
-          price: 5.73,
-          stars: "★★★★★",
-          icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png",
-          badge: "الأكثر طلباً"
-        },
-        {
-          title: "أفضل خدمة متابعين تيك توك (عرب حقيقيين وتفاعل) + ضمان",
-          rate: "1000 / $6.98",
-          price: 6.98,
-          stars: "★★★★★",
-          icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png",
-          badge: ""
-        },
-        {
-          title: "باقة 5000 مشاهدة سريعة للفيديوهات اكسبلور",
-          rate: "5000 / $1.20",
-          price: 1.20,
-          stars: "★★★★★",
-          icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png",
-          badge: ""
-        }
+        { title: "أرخص خدمة زيادة متابعين تيك توك", rate: "10 / $0.03", stars: "★★★★★", icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png", badge: "" },
+        { title: "زيادة متابعين تيك توك ممتازة + ضمان", rate: "1000 / $5.73", stars: "★★★★★", icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png", badge: "الأكثر طلباً" },
+        { title: "متابعين تيك توك عرب حقيقيين وتفاعل", rate: "1000 / $6.98", stars: "★★★★★", icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png", badge: "" },
+        { title: "باقة 5000 مشاهدة سريعة اكسبلور", rate: "5000 / $1.20", stars: "★★★★★", icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png", badge: "" }
       ],
       instagram: [
-        {
-          title: "متابعين انستغرام مكس مظهر حقيقي وسرعة فائقة",
-          rate: "1000 / $3.50",
-          price: 3.50,
-          stars: "★★★★★",
-          icon: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png",
-          badge: "مميز"
-        },
-        {
-          title: "متابعين انستغرام VIP ضمان تعويض النقص 60 يوم",
-          rate: "1000 / $4.90",
-          price: 4.90,
-          stars: "★★★★★",
-          icon: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png",
-          badge: ""
-        }
+        { title: "متابعين انستغرام مكس مظهر حقيقي", rate: "1000 / $3.50", stars: "★★★★★", icon: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png", badge: "مميز" },
+        { title: "متابعين انستغرام VIP ضمان 60 يوم", rate: "1000 / $4.90", stars: "★★★★★", icon: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png", badge: "" }
       ],
       snapchat: [
-        {
-          title: "إضافات ومتابعين سناب شات للملف التعريفي حقيقي",
-          rate: "500 / $6.50",
-          price: 6.50,
-          stars: "★★★★★",
-          icon: "https://cdn-icons-png.flaticon.com/512/1384/1384068.png",
-          badge: "حصري"
-        },
-        {
-          title: "مشاهدات قصص ستوري سناب شات خليجي وسريع",
-          rate: "1000 / $4.20",
-          price: 4.20,
-          stars: "★★★★★",
-          icon: "https://cdn-icons-png.flaticon.com/512/1384/1384068.png",
-          badge: ""
-        }
+        { title: "إضافات ومتابعين سناب شات للملف التعريفي", rate: "500 / $6.50", stars: "★★★★★", icon: "https://cdn-icons-png.flaticon.com/512/1384/1384068.png", badge: "حصري" },
+        { title: "مشاهدات ستوري سناب شات خليجي", rate: "1000 / $4.20", stars: "★★★★★", icon: "https://cdn-icons-png.flaticon.com/512/1384/1384068.png", badge: "" }
       ],
       popular: [
-        {
-          title: "خدمة زيادة متابعين تيك توك ممتازة لتكبير الحساب",
-          rate: "1000 / $5.73",
-          price: 5.73,
-          stars: "★★★★★",
-          icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png",
-          badge: "الأكثر طلباً"
-        },
-        {
-          title: "متابعين انستغرام VIP ضمان تعويض النقص",
-          rate: "1000 / $4.90",
-          price: 4.90,
-          stars: "★★★★★",
-          icon: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png",
-          badge: "VIP"
-        }
+        { title: "زيادة متابعين تيك توك ممتازة لتكبير الحساب", rate: "1000 / $5.73", stars: "★★★★★", icon: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png", badge: "الأكثر طلباً" },
+        { title: "متابعين انستغرام VIP ضمان تعويض النقص", rate: "1000 / $4.90", stars: "★★★★★", icon: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png", badge: "VIP" }
       ]
     };
 
-    let activeCategory = 'tiktok';
+    let selectedService = null;
 
     function loadServices(category, element) {
-      activeCategory = category;
       document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
       if(element) element.classList.add('active');
 
@@ -610,32 +602,18 @@
       });
     }
 
+    function switchPayTab(type, btn) {
+      document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.pay-content').forEach(c => c.classList.remove('show'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + type).classList.add('show');
+    }
+
     function openOrderModal(category, index) {
-      const item = SERVICES[category][index];
-      document.getElementById('modalServiceTitle').innerText = item.title;
-      document.getElementById('modalPrice').innerText = item.rate;
-      document.getElementById('walletAddress').innerText = CONFIG.usdtWallet;
-      
-      const sendBtn = document.getElementById('waSendBtn');
-      sendBtn.onclick = function() {
-        const account = document.getElementById('targetAccount').value.trim();
-        if(!account) {
-          alert('يرجى إدخال اسم الحساب أو الرابط');
-          return false;
-        }
-        const msg = encodeURIComponent(`طلب جديد:\nالخدمة: ${item.title}\nالحساب: ${account}\nالسعر: ${item.rate}`);
-        sendBtn.href = `https://wa.me/${CONFIG.whatsapp}?text=${msg}`;
-      };
+      selectedService = SERVICES[category][index];
+      document.getElementById('modalServiceTitle').innerText = selectedService.title;
+      document.getElementById('modalPrice').innerText = selectedService.rate;
 
-      document.getElementById('orderModal').style.display = 'flex';
-    }
-
-    function closeModal() {
-      document.getElementById('orderModal').style.display = 'none';
-    }
-
-    // تشغيل الصفحة مباشرة
-    loadServices('tiktok');
-  </script>
-</body>
-</html>
+      document.getElementById('bankNameDisplay').innerText = SETTINGS.bankName;
+      document.getElementById('bankOwnerDisplay').innerText = SETTINGS.bankOwner;
+      document.getElementById('ibanDisplay').innerText = SETTINGS.iban;
