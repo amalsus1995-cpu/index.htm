@@ -3,328 +3,346 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BOOST ZONE | منصة دعم الحسابات الاحترافية</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <title>متجر فالكون للخدمات</title>
   <style>
-    :root {
-      --bg: #070913;
-      --card-bg: rgba(18, 23, 41, 0.75);
-      --border-color: rgba(255, 255, 255, 0.08);
-      --tiktok-glow: #fe2c55;
-      --tiktok-cyan: #25f4ee;
-      --insta-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-      --snap-glow: #fffc00;
-      --accent: #6366f1;
-      --accent-glow: rgba(99, 102, 241, 0.35);
-      --text: #f8fafc;
-      --text-sub: #94a3b8;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Tajawal', sans-serif;
-      -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     body {
-      background-color: var(--bg);
-      background-image: 
-        radial-gradient(circle at 10% 20%, rgba(254, 44, 85, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(37, 244, 238, 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%);
-      color: var(--text);
+      background-color: #0b0f19;
+      color: #ffffff;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 25px 15px;
+      padding: 15px;
     }
 
-    .glass-container {
+    .container {
       width: 100%;
-      max-width: 680px;
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 28px;
-      border: 1px solid var(--border-color);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 40px rgba(99, 102, 241, 0.15);
-      padding: 35px 25px;
-      position: relative;
-      overflow: hidden;
+      max-width: 500px;
+      background: #151c2c;
+      border: 1px solid #232d42;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
 
-    .glass-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--tiktok-cyan), var(--tiktok-glow), #fffc00, var(--accent));
-    }
-
-    /* شريط العرض الترويجي */
-    .promo-banner {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px dashed rgba(255, 255, 255, 0.12);
-      border-radius: 14px;
-      padding: 8px 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      margin-bottom: 25px;
-    }
-
-    .badge-live {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(239, 68, 68, 0.15);
-      color: #ef4444;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 12px;
-    }
-
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background: #ef4444;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #ef4444;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.4); opacity: 0.5; }
-    }
-
-    header {
+    .header {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
-    header h1 {
-      font-size: 32px;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-      background: linear-gradient(135deg, #fff 40%, var(--text-sub) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .header h1 {
+      font-size: 22px;
+      margin-bottom: 6px;
+      color: #38bdf8;
     }
 
-    header p {
-      color: var(--text-sub);
-      font-size: 14px;
+    .header p {
+      font-size: 13px;
+      color: #94a3b8;
     }
 
-    /* منصات السوشيال ميديا */
-    .platform-tabs {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 25px;
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
     }
 
     .tab-btn {
-      position: relative;
-      background: rgba(13, 17, 30, 0.8);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 14px 10px;
+      flex: 1;
+      padding: 10px 5px;
+      background: #0b0f19;
+      color: #94a3b8;
+      border: 1px solid #232d42;
+      border-radius: 8px;
       cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      color: var(--text-sub);
-      font-weight: 700;
       font-size: 14px;
+      font-weight: bold;
     }
 
-    .tab-btn svg {
-      width: 26px;
-      height: 26px;
-      fill: currentColor;
-      transition: transform 0.3s ease;
+    .tab-btn.active {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #2563eb;
     }
 
-    .tab-btn:hover {
-      transform: translateY(-3px);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .tab-btn.active.tiktok {
-      background: rgba(254, 44, 85, 0.08);
-      border-color: var(--tiktok-glow);
-      color: #fff;
-      box-shadow: 0 0 20px rgba(254, 44, 85, 0.25);
-    }
-    .tab-btn.active.tiktok svg { fill: var(--tiktok-glow); transform: scale(1.1); }
-
-    .tab-btn.active.instagram {
-      background: rgba(225, 48, 108, 0.08);
-      border-color: #e1306c;
-      color: #fff;
-      box-shadow: 0 0 20px rgba(225, 48, 108, 0.25);
-    }
-    .tab-btn.active.instagram svg { fill: #e1306c; transform: scale(1.1); }
-
-    .tab-btn.active.snapchat {
-      background: rgba(255, 252, 0, 0.08);
-      border-color: var(--snap-glow);
-      color: #fff;
-      box-shadow: 0 0 20px rgba(255, 252, 0, 0.25);
-    }
-    .tab-btn.active.snapchat svg { fill: var(--snap-glow); transform: scale(1.1); }
-
-    /* شبكة أنواع الخدمات */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 22px;
-    }
-
-    .srv-chip {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 10px;
-      text-align: center;
-      font-size: 13px;
-      cursor: pointer;
-      font-weight: 500;
-      color: var(--text-sub);
-      transition: all 0.2s ease;
-    }
-
-    .srv-chip.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-      box-shadow: 0 0 15px var(--accent-glow);
-      font-weight: 700;
-    }
-
-    /* الحقول والإدخالات */
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     label {
       display: block;
+      margin-bottom: 6px;
       font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 8px;
       color: #cbd5e1;
     }
 
-    input, select, textarea {
+    input, select {
       width: 100%;
-      background: #090d1a;
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 14px 16px;
-      color: #fff;
-      font-size: 15px;
+      padding: 12px;
+      background: #0b0f19;
+      border: 1px solid #232d42;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 14px;
       outline: none;
-      transition: all 0.25s ease;
     }
 
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 15px var(--accent-glow);
+    input:focus, select:focus {
+      border-color: #38bdf8;
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 85px;
-      font-size: 13px;
-    }
-
-    /* لوحة عرض السعر والضمان */
-    .checkout-summary {
-      background: linear-gradient(180deg, rgba(20, 26, 48, 0.6) 0%, rgba(10, 14, 28, 0.8) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 18px;
-      padding: 18px 20px;
-      margin-bottom: 25px;
+    .price-box {
+      background: #0b0f19;
+      border: 1px dashed #334155;
+      padding: 14px;
+      border-radius: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 20px;
     }
 
-    .price-tag {
-      font-size: 26px;
-      font-weight: 900;
-      color: #38bdf8;
-      text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    .price-box span {
+      font-size: 14px;
+      color: #94a3b8;
     }
 
-    .features-list {
-      display: flex;
-      gap: 15px;
-      margin-top: 15px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-top: 12px;
+    .price-value {
+      font-size: 20px;
+      font-weight: bold;
+      color: #22c55e;
     }
 
-    .feature-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: #10b981;
-      font-weight: 600;
-    }
-
-    /* أزرار العمليات */
-    .btn-fire {
+    .submit-btn {
       width: 100%;
-      background: linear-gradient(90deg, #6366f1, #8b5cf6);
-      color: #fff;
+      padding: 14px;
+      background: #2563eb;
       border: none;
-      border-radius: 16px;
-      padding: 17px;
-      font-size: 16px;
-      font-weight: 800;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.5);
-      transition: all 0.3s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
     }
 
-    .btn-fire:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.7);
+    .submit-btn:hover {
+      background: #1d4ed8;
     }
 
-    /* النافذة المنبثقة للمودال */
-    .modal-overlay {
+    /* نافذة التأكيد */
+    .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.75);
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      z-index: 999;
+      padding: 15px;
+      z-index: 100;
     }
 
     .modal-box {
-      background: #0f
+      background: #151c2c;
+      border: 1px solid #232d42;
+      border-radius: 14px;
+      padding: 20px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .modal-box h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .details-text {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .wallet-box {
+      background: #0b0f19;
+      border: 1px solid #232d42;
+      padding: 8px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #38bdf8;
+      word-break: break-all;
+      margin-bottom: 15px;
+    }
+
+    .wa-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #22c55e;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .close-btn {
+      width: 100%;
+      padding: 10px;
+      background: transparent;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>منصة فالكون للخدمات</h1>
+      <p>شحن تيك توك، انستغرام، وسناب شات بدون كلمة مرور</p>
+    </div>
+
+    <!-- أزرار المنصات -->
+    <div class="tabs">
+      <button type="button" class="tab-btn active" onclick="setPlatform('tiktok', this)">تيك توك</button>
+      <button type="button" class="tab-btn" onclick="setPlatform('instagram', this)">انستغرام</button>
+      <button type="button" class="tab-btn" onclick="setPlatform('snapchat', this)">سناب شات</button>
+    </div>
+
+    <!-- نموذج الإدخال -->
+    <form id="orderForm" onsubmit="submitForm(event)">
+      <div class="form-group">
+        <label id="inputLabel">اسم المستخدم أو رابط الحساب (تيك توك)</label>
+        <input type="text" id="accountInput" placeholder="@username" required>
+      </div>
+
+      <div class="form-group">
+        <label>اختر الباقة المطلوبة</label>
+        <select id="packageSelect" onchange="calculatePrice()"></select>
+      </div>
+
+      <div class="price-box">
+        <span>السعر المطلوب:</span>
+        <span class="price-value" id="displayPrice">0.00 $</span>
+      </div>
+
+      <button type="submit" class="submit-btn">إتمام الطلب الآن</button>
+    </form>
+  </div>
+
+  <!-- نافذة الدفع -->
+  <div class="modal" id="orderModal">
+    <div class="modal-box">
+      <h3>تأكيد الطلب</h3>
+      <div class="details-text" id="orderSummary"></div>
+
+      <label style="font-size: 12px; display: block; margin-bottom: 4px;">عنوان المحفظة (USDT - TRC20):</label>
+      <div class="wallet-box" id="walletAddress">TFxxxxxxxYourTRC20Addressxxxxxxxxxx</div>
+
+      <a id="whatsappLink" class="wa-btn" target="_blank">تأكيد عبر واتساب</a>
+      <button type="button" class="close-btn" onclick="hideModal()">إغلاق</button>
+    </div>
+  </div>
+
+  <script>
+    // الإعدادات المباشرة
+    var myWhatsApp = "905XXXXXXXXX"; // ضع رقمك الدولي هنا
+    var myTRC20 = "TFxxxxxxxYourTRC20Addressxxxxxxxxxx"; // ضع عنوان محفظتك هنا
+
+    var data = {
+      tiktok: [
+        { title: "500 متابع سريع", price: 2.5 },
+        { title: "1000 متابع مع ضمان", price: 4.5 },
+        { title: "2500 متابع مميز", price: 9.9 },
+        { title: "5000 مشاهدة للفيديوهات", price: 1.5 }
+      ],
+      instagram: [
+        { title: "500 متابع مكس", price: 2.0 },
+        { title: "1000 متابع ضمان تعويض", price: 3.8 },
+        { title: "2000 متابع VIP", price: 7.0 },
+        { title: "1000 لايك", price: 1.2 }
+      ],
+      snapchat: [
+        { title: "500 إضافة سناب", price: 4.0 },
+        { title: "1000 متابع ملف تعريفي", price: 7.5 },
+        { title: "2500 متابع ملف تعريفي", price: 16.0 },
+        { title: "5000 مشاهدة ستوري", price: 5.0 }
+      ]
+    };
+
+    var current = 'tiktok';
+
+    function setPlatform(platform, btn) {
+      current = platform;
+      var buttons = document.querySelectorAll('.tab-btn');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active');
+      }
+      btn.classList.add('active');
+
+      var label = document.getElementById('inputLabel');
+      if (platform === 'tiktok') label.innerText = "اسم المستخدم أو رابط الحساب (تيك توك)";
+      if (platform === 'instagram') label.innerText = "اسم المستخدم أو رابط الحساب (انستغرام)";
+      if (platform === 'snapchat') label.innerText = "اسم المستخدم (سناب شات)";
+
+      updateOptions();
+    }
+
+    function updateOptions() {
+      var select = document.getElementById('packageSelect');
+      select.innerHTML = "";
+      var list = data[current];
+      for (var i = 0; i < list.length; i++) {
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.innerText = list[i].title + " - (" + list[i].price + " $)";
+        select.appendChild(opt);
+      }
+      calculatePrice();
+    }
+
+    function calculatePrice() {
+      var select = document.getElementById('packageSelect');
+      var index = select.value;
+      if (data[current][index]) {
+        document.getElementById('displayPrice').innerText = data[current][index].price.toFixed(2) + " $";
+      }
+    }
+
+    function submitForm(e) {
+      e.preventDefault();
+      var acc = document.getElementById('accountInput').value;
+      var index = document.getElementById('packageSelect').value;
+      var pkg = data[current][index];
+
+      var summary = "الخدمة: " + current.toUpperCase() + "<br>الحساب: " + acc + "<br>الباقة: " + pkg.title + "<br>المبلغ المطلوب: " + pkg.price + " $";
+      document.getElementById('orderSummary').innerHTML = summary;
+      document.getElementById('walletAddress').innerText = myTRC20;
+
+      var waText = encodeURIComponent("طلب جديد من المتجر:\n- المنصة: " + current + "\n- الحساب: " + acc + "\n- الباقة: " + pkg.title + "\n- السعر: " + pkg.price + " $");
+      document.getElementById('whatsappLink').href = "https://wa.me/" + myWhatsApp + "?text=" + waText;
+
+      document.getElementById('orderModal').style.display = 'flex';
+    }
+
+    function hideModal() {
+      document.getElementById('orderModal').style.display = 'none';
+    }
+
+    // تشغيل القوائم تلقائياً
+    updateOptions();
+  </script>
+</body>
+</html>
