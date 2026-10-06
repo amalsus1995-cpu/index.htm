@@ -3,724 +3,371 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>منصة التداول الرقمي - برو تريدنج</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <title>متجر فالكون | لخدمات التواصل الاجتماعي</title>
   <style>
     :root {
-      --bg-dark: #090d16;
-      --panel-bg: #121826;
-      --card-bg: #1a2234;
-      --primary: #10b981;
-      --danger: #ef4444;
-      --accent: #f59e0b;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
       --text-main: #f8fafc;
-      --text-muted: #8b9bb4;
-      --border-color: #243049;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --tiktok: #fe2c55;
+      --insta: #e1306c;
+      --snap: #fffc00;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Cairo', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     body {
-      background-color: var(--bg-dark);
+      background-color: var(--bg);
       color: var(--text-main);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
     }
 
-    /* الشريط العلوي */
-    .navbar {
-      background: var(--panel-bg);
-      border-bottom: 1px solid var(--border-color);
-      padding: 0.75rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-weight: 800;
-      font-size: 1.25rem;
-      color: #38bdf8;
-    }
-
-    .wallet-controls {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .balance-box {
+    .container {
+      width: 100%;
+      max-width: 650px;
       background: var(--card-bg);
-      padding: 0.45rem 1rem;
-      border-radius: 9999px;
-      border: 1px solid var(--border-color);
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      border-radius: 20px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
-    .balance-box span.val {
-      color: var(--primary);
-      font-size: 1.1rem;
-    }
-
-    .btn-top {
-      padding: 0.45rem 0.9rem;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: all 0.2s;
-    }
-
-    .btn-top-deposit { background: var(--primary); color: white; }
-    .btn-top-deposit:hover { background: #059669; }
-
-    .btn-top-withdraw { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-main); }
-    .btn-top-withdraw:hover { background: var(--border-color); }
-
-    /* مساحة التداول الرئيسية */
-    .main-grid {
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 12px;
-      padding: 12px;
-      flex-grow: 1;
-    }
-
-    @media (max-width: 900px) {
-      .main-grid { grid-template-columns: 1fr; }
-    }
-
-    .center-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .chart-container {
-      background: var(--panel-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      height: 440px;
-      overflow: hidden;
-    }
-
-    /* لوحة الأوامر الجانبية */
-    .order-panel {
-      background: var(--panel-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .price-tracker {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      padding: 0.75rem;
-      border-radius: 8px;
+    header {
       text-align: center;
+      margin-bottom: 25px;
     }
 
-    .price-tracker .symbol {
-      font-size: 0.85rem;
+    header h1 {
+      font-size: 26px;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    header p {
       color: var(--text-muted);
+      font-size: 14px;
     }
 
-    .price-tracker .current-price {
-      font-size: 1.7rem;
-      font-weight: 800;
-      color: var(--primary);
-      direction: ltr;
-    }
-
-    .form-group {
+    .tabs {
       display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
+      gap: 10px;
+      margin-bottom: 25px;
     }
 
-    .form-group label {
-      font-size: 0.85rem;
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: #0f172a;
       color: var(--text-muted);
-    }
-
-    .input-field {
-      width: 100%;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      color: white;
-      padding: 0.65rem 0.8rem;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-weight: 700;
-      outline: none;
-      direction: ltr;
-      text-align: right;
-    }
-
-    .btn-buy {
-      width: 100%;
-      padding: 0.9rem;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      font-weight: 800;
+      border-radius: 12px;
       cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 8px;
     }
 
-    .btn-buy:hover { background: #059669; }
-
-    /* جدول الصفقات المفتوحة */
-    .positions-panel {
-      background: var(--panel-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.25rem;
-      flex-grow: 1;
+    .tab-btn.active {
+      border-color: var(--accent);
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--text-main);
     }
 
-    table {
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #cbd5e1;
+    }
+
+    select, input {
       width: 100%;
-      border-collapse: collapse;
-      text-align: right;
-      font-size: 0.9rem;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0f172a;
+      color: var(--text-main);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
     }
 
-    th, td {
-      padding: 0.75rem 0.5rem;
-      border-bottom: 1px solid var(--border-color);
+    select:focus, input:focus {
+      border-color: var(--accent);
     }
 
-    th {
+    .price-box {
+      background: #0b1120;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      border: 1px dashed var(--border);
+    }
+
+    .price-box span {
       color: var(--text-muted);
-      font-weight: 600;
+      font-size: 14px;
     }
 
-    .pnl-winning { color: var(--primary); font-weight: 800; }
-    .pnl-losing { color: var(--danger); font-weight: 800; }
-
-    .btn-close {
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid var(--danger);
-      color: var(--danger);
-      padding: 0.3rem 0.7rem;
-      border-radius: 4px;
-      cursor: pointer;
+    .price-amount {
+      font-size: 22px;
       font-weight: 700;
-      font-size: 0.8rem;
+      color: #10b981;
     }
 
-    .btn-close:hover {
-      background: var(--danger);
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: var(--accent);
       color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
     }
 
-    /* Modals النوافذ المنبثقة */
+    .submit-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    /* نافذة الدفع */
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(5px);
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
       align-items: center;
       justify-content: center;
-      z-index: 1000;
-      padding: 1rem;
+      padding: 20px;
     }
-    .modal.active { display: flex; }
 
-    .modal-card {
-      background: var(--panel-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.5rem;
+    .modal-content {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 25px;
       width: 100%;
-      max-width: 440px;
+      max-width: 450px;
+      text-align: center;
     }
 
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.25rem;
+    .modal-content h3 {
+      margin-bottom: 12px;
     }
 
-    .qr-container {
-      display: flex;
-      justify-content: center;
-      margin: 1rem 0;
-      background: white;
+    .crypto-address {
+      background: #0f172a;
       padding: 10px;
       border-radius: 8px;
-      width: 160px;
-      height: 160px;
-      margin-inline: auto;
+      font-family: monospace;
+      font-size: 12px;
+      word-break: break-all;
+      margin: 15px 0;
+      border: 1px solid var(--border);
+      color: #38bdf8;
     }
 
-    .copy-box {
+    .action-group {
       display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
     }
 
-    .copy-box input {
-      flex-grow: 1;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      color: var(--accent);
-      padding: 0.6rem;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      direction: ltr;
-    }
-
-    /* تنبيهات الإشعار */
-    .alert-toast {
-      position: fixed;
-      top: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 0.85rem 1.5rem;
+    .btn-wa {
+      background: #25d366;
+      color: white;
+      padding: 12px;
       border-radius: 8px;
-      font-weight: 700;
-      display: none;
-      align-items: center;
-      gap: 0.6rem;
-      z-index: 2000;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      text-decoration: none;
+      font-weight: 600;
+      display: block;
     }
-    .alert-success { background: #064e3b; color: #34d399; border: 1px solid #059669; }
-    .alert-danger { background: #7f1d1d; color: #fca5a5; border: 1px solid #dc2626; }
+
+    .btn-close {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
-  <!-- التنبيه المنبثق -->
-  <div id="toastAlert" class="alert-toast">
-    <i id="toastIcon" class="fa-solid fa-circle-check"></i>
-    <span id="toastMsg">تمت العملية</span>
-  </div>
+  <div class="container">
+    <header>
+      <h1>منصة فالكون للخدمات</h1>
+      <p>تنفيذ فوري لخدمات المتابعين والتفاعل دون الحاجة لكلمة المرور</p>
+    </header>
 
-  <!-- الشريط العلوي -->
-  <header class="navbar">
-    <div class="brand">
-      <i class="fa-solid fa-chart-line"></i>
-      منصة برو تريدنج ProTrader
+    <!-- أزرار المنصات -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchPlatform('tiktok', this)">تيك توك</button>
+      <button class="tab-btn" onclick="switchPlatform('instagram', this)">انستغرام</button>
+      <button class="tab-btn" onclick="switchPlatform('snapchat', this)">سناب شات</button>
     </div>
 
-    <div class="wallet-controls">
-      <div class="balance-box">
-        <span>الرصيد المتاح:</span>
-        <span class="val" id="balanceDisplay">$0.00</span>
-      </div>
-      <button class="btn-top btn-top-deposit" onclick="openModal('depositModal')">
-        <i class="fa-solid fa-wallet"></i> إيداع USDT
-      </button>
-      <button class="btn-top btn-top-withdraw" onclick="openModal('withdrawModal')">
-        <i class="fa-solid fa-arrow-up-from-bracket"></i> سحب
-      </button>
-    </div>
-  </header>
-
-  <!-- مساحة العمل والتداول -->
-  <main class="main-grid">
-    <div class="center-panel">
-      <!-- شارت تداول حي TradingView -->
-      <div class="chart-container" id="tv_chart_container"></div>
-
-      <!-- قائمة الصفقات المفتوحة -->
-      <div class="positions-panel">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-          <h3 style="font-size: 1.05rem;"><i class="fa-solid fa-list-check" style="color: #38bdf8;"></i> الصفقات الجارية المفتوحة</h3>
-          <span id="activeTradesCount" style="font-size: 0.85rem; color: var(--text-muted);">0 صفقات</span>
-        </div>
-
-        <table>
-          <thead>
-            <tr>
-              <th>الرمز</th>
-              <th>النوع</th>
-              <th>سعر الدخول</th>
-              <th>السعر الحالي</th>
-              <th>المبلغ</th>
-              <th>الربح / الخسارة</th>
-              <th>إجراء</th>
-            </tr>
-          </thead>
-          <tbody id="positionsTableBody">
-            <tr id="emptyRow">
-              <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 2rem;">
-                لا توجد صفقات مفتوحة. قم بالإيداع وشراء العقود لمتابعة الربح والخسارة مباشرة.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- لوحة أمر الشراء -->
-    <aside class="order-panel">
-      <div class="price-tracker">
-        <div class="symbol">سعر البيتكوين الحي (Binance Live)</div>
-        <div class="current-price" id="liveBtcPrice">جاري التحديث...</div>
+    <!-- نموذج الطلب -->
+    <form id="orderForm" onsubmit="handleOrder(event)">
+      <div class="form-group">
+        <label id="inputLabel" for="accountInput">اسم المستخدم أو رابط الحساب في تيك توك</label>
+        <input type="text" id="accountInput" placeholder="@username أو الرابط المباشر" required>
       </div>
 
       <div class="form-group">
-        <label>مبلغ الشراء ($)</label>
-        <input type="number" id="tradeAmountInput" class="input-field" value="50" min="5" step="5">
+        <label for="packageSelect">اختر الباقة</label>
+        <select id="packageSelect" onchange="updatePrice()"></select>
       </div>
 
-      <div class="form-group">
-        <label>الرافعة المالية</label>
-        <select id="leverageInput" class="input-field">
-          <option value="1">1x (بدون رافعة)</option>
-          <option value="5">5x</option>
-          <option value="10" selected>10x</option>
-          <option value="20">20x</option>
-        </select>
+      <div class="price-box">
+        <span>السعر الإجمالي المطلوب:</span>
+        <div class="price-amount" id="totalPrice">0.00 $</div>
       </div>
 
-      <button class="btn-buy" onclick="handleBuyClick()">
-        <i class="fa-solid fa-arrow-trend-up"></i>
-        تنفيذ شراء (Long)
-      </button>
-
-      <div style="background: var(--card-bg); padding: 0.85rem; border-radius: 6px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.6;">
-        <i class="fa-solid fa-shield-halved" style="color: var(--primary);"></i> 
-        يتم التحقق من الرصيد في كل عملية. لن يتم فتح الصفقة في حال عدم توفر الرصيد الكافي بالمحفظة.
-      </div>
-    </aside>
-  </main>
-
-  <!-- نافذة الإيداع -->
-  <div class="modal" id="depositModal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h4><i class="fa-solid fa-qrcode" style="color: var(--primary);"></i> إيداع USDT (شبكة TRC-20)</h4>
-        <i class="fa-solid fa-xmark" style="cursor: pointer;" onclick="closeModal('depositModal')"></i>
-      </div>
-
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
-        أرسل رصيد USDT عبر شبكة ترون <strong>TRC-20 فقط</strong> إلى هذا العنوان:
-      </p>
-
-      <div class="qr-container" id="qrcode"></div>
-
-      <div class="copy-box">
-        <input type="text" id="depositAddressInput" value="TNLzEJSEru8DnVk7fiVV5Mq1aj3JgjHAyo" readonly>
-        <button class="btn-top btn-top-deposit" onclick="copyWalletAddress()">
-          <i class="fa-regular fa-copy"></i>
-        </button>
-      </div>
-
-      <div class="form-group" style="margin-bottom: 1rem;">
-        <label>المبلغ المودع ($)</label>
-        <input type="number" id="depositAmount" class="input-field" placeholder="مثال: 100">
-      </div>
-
-      <button class="btn-buy" onclick="confirmDepositMock()">
-        تأكيد وصول الإيداع إلى المحفظة
-      </button>
-    </div>
+      <button type="submit" class="submit-btn">متابعة إتمام الطلب</button>
+    </form>
   </div>
 
-  <!-- نافذة السحب -->
-  <div class="modal" id="withdrawModal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h4><i class="fa-solid fa-money-bill-transfer" style="color: var(--accent);"></i> طلب سحب أرباح</h4>
-        <i class="fa-solid fa-xmark" style="cursor: pointer;" onclick="closeModal('withdrawModal')"></i>
+  <!-- نافذة إتمام الطلب والدفع -->
+  <div class="modal" id="paymentModal">
+    <div class="modal-content">
+      <h3>تفاصيل الطلب والدفع</h3>
+      <p style="font-size: 14px; color: var(--text-muted);" id="orderSummary"></p>
+
+      <div style="text-align: right; margin-top: 15px;">
+        <label style="font-size: 13px;">عنوان الدفع المباشر (USDT TRC20):</label>
+        <div class="crypto-address" id="walletAddress">TXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
       </div>
 
-      <div class="form-group" style="margin-bottom: 1rem;">
-        <label>عنوان محفظتك المستلمة (USDT TRC-20)</label>
-        <input type="text" id="withdrawWalletInput" class="input-field" placeholder="مثال: T..." style="text-align: left;">
+      <div class="action-group">
+        <a id="whatsappBtn" class="btn-wa" target="_blank">تأكيد وإرسال الإشعار عبر واتساب</a>
+        <button class="btn-close" onclick="closeModal()">إلغاء</button>
       </div>
-
-      <div class="form-group" style="margin-bottom: 1.25rem;">
-        <label>مبلغ السحب ($) - الحد الأدنى 10$</label>
-        <input type="number" id="withdrawAmountInput" class="input-field" placeholder="10">
-      </div>
-
-      <button class="btn-buy" style="background: var(--accent); color: black;" onclick="handleWithdrawRequest()">
-        تأكيد إرسال طلب السحب
-      </button>
     </div>
   </div>
-
-  <!-- تضمين مكتبة TradingView -->
-  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 
   <script>
-    // 1. الحالة العامة
-    let currentBalance = 0.00;
-    let liveMarketPrice = 65000.00;
-    let positions = [];
-    const MY_TRC20_WALLET = "TNLzEJSEru8DnVk7fiVV5Mq1aj3JgjHAyo";
+    // إعدادات المتجر
+    const CONFIG = {
+      whatsappNumber: "905XXXXXXXXX", // استبدل برقم هاتفك الدولي
+      usdtWallet: "TFxxxxxxxYourTRC20Addressxxxxxxxxxx" // عنوان محفظتك
+    };
 
-    // توليد رمز الـ QR لعنوان المحفظة
-    new QRCode(document.getElementById("qrcode"), {
-      text: MY_TRC20_WALLET,
-      width: 140,
-      height: 140
-    });
+    // باقات الخدمات والأسعار (بالدولار كمثال)
+    const PACKAGES = {
+      tiktok: [
+        { name: "500 متابع حقيقي/سريع", price: 2.5 },
+        { name: "1,000 متابع ضمان 30 يوم", price: 4.5 },
+        { name: "2,500 متابع عرض مميز", price: 9.9 },
+        { name: "5,000 مشاهدة للفيديوهات", price: 1.5 }
+      ],
+      instagram: [
+        { name: "500 متابع مكس", price: 2.0 },
+        { name: "1,000 متابع مع ضمان تعويض", price: 3.8 },
+        { name: "2,000 متابع VIP", price: 7.0 },
+        { name: "1,000 لايك موزعة", price: 1.2 }
+      ],
+      snapchat: [
+        { name: "500 إضافة سناب", price: 4.0 },
+        { name: "1,000 متابع للملف التعريفي", price: 7.5 },
+        { name: "2,500 متابع للملف التعريفي", price: 16.0 },
+        { name: "5,000 مشاهدة ستوري", price: 5.0 }
+      ]
+    };
 
-    // 2. تحميل شارت TradingView
-    new TradingView.widget({
-      "autosize": true,
-      "symbol": "BINANCE:BTCUSDT",
-      "interval": "1",
-      "timezone": "Etc/UTC",
-      "theme": "dark",
-      "style": "1",
-      "locale": "ar",
-      "toolbar_bg": "#121826",
-      "enable_publishing": false,
-      "allow_symbol_change": false,
-      "container_id": "tv_chart_container"
-    });
+    let currentPlatform = 'tiktok';
 
-    // 3. التغذية الحية لأسعار Binance عبر WebSocket
-    function connectBinancePriceFeed() {
-      const ws = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@trade');
+    function switchPlatform(platform, btnElement) {
+      currentPlatform = platform;
       
-      ws.onmessage = function(event) {
-        const data = JSON.parse(event.data);
-        const newPrice = parseFloat(data.p);
-        
-        const priceElement = document.getElementById('liveBtcPrice');
-        if (newPrice > liveMarketPrice) {
-          priceElement.style.color = 'var(--primary)';
-        } else if (newPrice < liveMarketPrice) {
-          priceElement.style.color = 'var(--danger)';
-        }
+      // تحديث مظهر الأزرار
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
 
-        liveMarketPrice = newPrice;
-        priceElement.innerText = `$${liveMarketPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-
-        updateLivePnL();
+      // تعديل عنوان الحقل
+      const labels = {
+        tiktok: "اسم المستخدم أو رابط الحساب في تيك توك",
+        instagram: "اسم المستخدم أو رابط الحساب في انستغرام",
+        snapchat: "اسم المستخدم (Username) أو رابط السناب"
       };
+      document.getElementById('inputLabel').innerText = labels[platform];
 
-      ws.onerror = function() {
-        setTimeout(connectBinancePriceFeed, 3000);
-      };
-    }
-    connectBinancePriceFeed();
-
-    // 4. تنفيذ أمر الشراء
-    function handleBuyClick() {
-      const amount = parseFloat(document.getElementById('tradeAmountInput').value);
-      const leverage = parseInt(document.getElementById('leverageInput').value);
-
-      if (isNaN(amount) || amount <= 0) {
-        showAlert('يرجى تحديد مبلغ صالح للشراء!', 'danger');
-        return;
-      }
-
-      // شرط الرصيد
-      if (amount > currentBalance) {
-        showAlert(`عذراً، رصيدك غير كافٍ! رصيدك الحالي: $${currentBalance.toFixed(2)}. قم بالإيداع أولاً.`, 'danger');
-        return;
-      }
-
-      currentBalance -= amount;
-      updateBalanceUI();
-
-      const newTrade = {
-        id: Date.now(),
-        symbol: 'BTC/USDT',
-        buyPrice: liveMarketPrice,
-        margin: amount,
-        leverage: leverage,
-        pnl: 0.00,
-        roi: 0.00
-      };
-
-      positions.unshift(newTrade);
-      showAlert(`تم فتح صفقة شراء بنجاح بسعر: $${liveMarketPrice.toFixed(2)}`, 'success');
-      renderPositionsTable();
+      renderPackages();
     }
 
-    // 5. متابعة الربح والخسارة لحظياً
-    function updateLivePnL() {
-      if (positions.length === 0) return;
+    function renderPackages() {
+      const select = document.getElementById('packageSelect');
+      select.innerHTML = '';
 
-      positions.forEach(pos => {
-        const priceChangeRatio = (liveMarketPrice - pos.buyPrice) / pos.buyPrice;
-        pos.pnl = pos.margin * priceChangeRatio * pos.leverage;
-        pos.roi = priceChangeRatio * pos.leverage * 100;
-
-        const pnlCell = document.getElementById(`pnl-${pos.id}`);
-        const curPriceCell = document.getElementById(`cur-${pos.id}`);
-
-        if (pnlCell && curPriceCell) {
-          curPriceCell.innerText = `$${liveMarketPrice.toFixed(2)}`;
-          const isWinning = pos.pnl >= 0;
-          const sign = isWinning ? '+' : '';
-          pnlCell.className = isWinning ? 'pnl-winning' : 'pnl-losing';
-          pnlCell.innerHTML = `${sign}$${pos.pnl.toFixed(2)} <span style="font-size: 0.75rem;">(${sign}${pos.roi.toFixed(1)}%)</span>`;
-        }
+      PACKAGES[currentPlatform].forEach((pkg, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = `${pkg.name} — (${pkg.price} $)`;
+        select.appendChild(option);
       });
+
+      updatePrice();
     }
 
-    // 6. عرض جدول الصفقات
-    function renderPositionsTable() {
-      const tbody = document.getElementById('positionsTableBody');
-      const countEl = document.getElementById('activeTradesCount');
-      countEl.innerText = `${positions.length} صفقات`;
-
-      if (positions.length === 0) {
-        tbody.innerHTML = `
-          <tr id="emptyRow">
-            <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 2rem;">
-              لا توجد صفقات مفتوحة.
-            </td>
-          </tr>
-        `;
-        return;
-      }
-
-      tbody.innerHTML = '';
-      positions.forEach(pos => {
-        const isWinning = pos.pnl >= 0;
-        const sign = isWinning ? '+' : '';
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><strong>${pos.symbol}</strong></td>
-          <td><span style="color: var(--primary); font-weight: 700;">شراء (${pos.leverage}x)</span></td>
-          <td>$${pos.buyPrice.toFixed(2)}</td>
-          <td id="cur-${pos.id}">$${liveMarketPrice.toFixed(2)}</td>
-          <td>$${pos.margin.toFixed(2)}</td>
-          <td id="pnl-${pos.id}" class="${isWinning ? 'pnl-winning' : 'pnl-losing'}">
-            ${sign}$${pos.pnl.toFixed(2)} <span style="font-size: 0.75rem;">(${sign}${pos.roi.toFixed(1)}%)</span>
-          </td>
-          <td>
-            <button class="btn-close" onclick="closePosition(${pos.id})">إغلاق وبيع</button>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    // 7. إغلاق الصفقة
-    function closePosition(tradeId) {
-      const idx = positions.findIndex(p => p.id === tradeId);
-      if (idx !== -1) {
-        const trade = positions[idx];
-        const returnAmount = trade.margin + trade.pnl;
-
-        if (returnAmount > 0) {
-          currentBalance += returnAmount;
-        }
-
-        const msg = trade.pnl >= 0 
-          ? `تم إغلاق الصفقة بربح: +$${trade.pnl.toFixed(2)}!` 
-          : `تم إغلاق الصفقة بخسارة: -$${Math.abs(trade.pnl).toFixed(2)}`;
-
-        showAlert(msg, trade.pnl >= 0 ? 'success' : 'danger');
-        positions.splice(idx, 1);
-        updateBalanceUI();
-        renderPositionsTable();
+    function updatePrice() {
+      const selectedIndex = document.getElementById('packageSelect').value;
+      const selectedPkg = PACKAGES[currentPlatform][selectedIndex];
+      if (selectedPkg) {
+        document.getElementById('totalPrice').innerText = `${selectedPkg.price.toFixed(2)} $`;
       }
     }
 
-    // الإيداع والسحب
-    function confirmDepositMock() {
-      const amount = parseFloat(document.getElementById('depositAmount').value);
-      if (isNaN(amount) || amount <= 0) {
-        showAlert('يرجى إدخال مبلغ صحيح للإيداع!', 'danger');
-        return;
-      }
-      currentBalance += amount;
-      updateBalanceUI();
-      closeModal('depositModal');
-      document.getElementById('depositAmount').value = '';
-      showAlert(`تم إيداع $${amount.toFixed(2)} في رصيد التداول بنجاح!`, 'success');
+    function handleOrder(e) {
+      e.preventDefault();
+      const account = document.getElementById('accountInput').value.trim();
+      const selectedIndex = document.getElementById('packageSelect').value;
+      const selectedPkg = PACKAGES[currentPlatform][selectedIndex];
+
+      const summary = `المنصة: ${currentPlatform.toUpperCase()} | الباقة: ${selectedPkg.name} | السعر: ${selectedPkg.price} $`;
+      document.getElementById('orderSummary').innerText = summary;
+      document.getElementById('walletAddress').innerText = CONFIG.usdtWallet;
+
+      // إعداد رسالة الواتساب الجاهزة
+      const msg = encodeURIComponent(`طلب جديد:\n- المنصة: ${currentPlatform}\n- الحساب: ${account}\n- الباقة: ${selectedPkg.name}\n- المبلغ: ${selectedPkg.price} $\n- تم تحويل الدفعة.`);
+      document.getElementById('whatsappBtn').href = `https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`;
+
+      document.getElementById('paymentModal').style.display = 'flex';
     }
 
-    function handleWithdrawRequest() {
-      const address = document.getElementById('withdrawWalletInput').value.trim();
-      const amount = parseFloat(document.getElementById('withdrawAmountInput').value);
-
-      if (!address.startsWith('T') || address.length < 30) {
-        showAlert('يرجى إدخال عنوان محفظة TRC-20 صحيح يبدأ بحرف T!', 'danger');
-        return;
-      }
-
-      if (isNaN(amount) || amount < 10) {
-        showAlert('الحد الأدنى للسحب هو 10$!', 'danger');
-        return;
-      }
-
-      if (amount > currentBalance) {
-        showAlert('رصيدك المتاح لا يكفي لإتمام السحب!', 'danger');
-        return;
-      }
-
-      currentBalance -= amount;
-      updateBalanceUI();
-      closeModal('withdrawModal');
-      document.getElementById('withdrawAmountInput').value = '';
-      document.getElementById('withdrawWalletInput').value = '';
-      showAlert(`تم تسجيل طلب سحب $${amount.toFixed(2)} وهو قيد التحويل إلى محفظتك!`, 'success');
+    function closeModal() {
+      document.getElementById('paymentModal').style.display = 'none';
     }
 
-    function copyWalletAddress() {
-      const input = document.getElementById('depositAddressInput');
-      input.select();
-      navigator.clipboard.writeText(input.value);
-      showAlert('تم نسخ عنوان المحفظة بنجاح!', 'success');
-    }
-
-    function updateBalanceUI() {
-      document.getElementById('balanceDisplay').innerText = `$${currentBalance.toFixed(2)}`;
-    }
-
-    function openModal(id) { document.getElementById(id).classList.add('active'); }
-    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-
-    function showAlert(message, type) {
-      const toast = document.getElementById('toastAlert');
-      const msg = document.getElementById('toastMsg');
-      const icon = document.getElementById('toastIcon');
-
-      toast.className = `alert-toast alert-${type}`;
-      msg.innerText = message;
-      icon.className = type === 'success' ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-exclamation';
-
-      toast.style.display = 'flex';
-      setTimeout(() => { toast.style.display = 'none'; }, 3500);
-    }
+    // تهيئة الصفحة عند الفتح
+    renderPackages();
   </script>
 </body>
 </html>
